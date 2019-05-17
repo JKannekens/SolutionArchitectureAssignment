@@ -55,16 +55,7 @@ module.exports = {
     },
 
     async registerPatient(req, res, next) {
-        registerPatient.bsn = req.body.bsn;
-        registerPatient.firstName = req.body.firstName;
-        registerPatient.middlename = req.body.middleName;
-        registerPatient.lastname = req.body.lastName;
-        registerPatient.age = req.body.age;
-        registerPatient.streetName = req.body.streetName;
-        registerPatient.houseNr = req.body.houseNr;
-        registerPatient.postalCode = req.body.postalCode;
-        registerPatient.city = req.body.city;
-        registerPatient.deceased = false;
+        registerPatient = req.body.patient;
 
         Patient.find({bsn: registerPatient.bsn})
             .then((patient) => {
