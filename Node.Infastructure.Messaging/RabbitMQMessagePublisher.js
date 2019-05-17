@@ -1,4 +1,5 @@
 var amqp = require('amqplib/callback_api');
+const _iMessagePublisher = require('IMessagePublisher')
 
 amqp.connect('amqp://localhost', function(error0, connection) {
     if (error0) {

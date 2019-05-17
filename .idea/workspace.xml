@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f711f565-0be6-4650-8dfa-950b8aab3a99" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SolutionApp/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/PatientAccountAPI/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SolutionApp/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/PatientAccountAPI/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SolutionApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/PatientAccountAPI/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SolutionApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/PatientAccountAPI/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SolutionApp/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/PatientAccountAPI/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Node.Infastructure.Messaging/RabbitMQMessagePublisher.js" beforeDir="false" afterPath="$PROJECT_DIR$/Node.Infastructure.Messaging/RabbitMQMessagePublisher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientAccountAPI/Controller/patient.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/PatientAccountAPI/Controller/patient.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientAccountAPI/Model/patient.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/PatientAccountAPI/Model/patient.model.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,11 +37,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/StartSolution.ps1">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PatientAccountAPI/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
@@ -64,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PatientAccountAPI/Model/patient.model.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="44" column="25" selection-start-line="44" selection-start-column="25" selection-end-line="44" selection-end-column="25" />
+            <state relative-caret-position="337">
+              <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -73,8 +66,35 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PatientAccountAPI/Controller/patient.controller.ts">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="318">
+              <caret line="55" column="58" lean-forward="true" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PatientAccountAPI/Event/patientRegistered.event.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Node.Infastructure.Messaging/IMessagePublisher.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="58" lean-forward="true" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Node.Infastructure.Messaging/RabbitMQMessagePublisher.js">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" column="82" selection-start-line="8" selection-start-column="82" selection-end-line="8" selection-end-column="82" />
+              <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -86,16 +106,6 @@
               <caret column="46" selection-start-column="46" selection-end-column="46" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PatientAccountAPI/server.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PatientAccountAPI/.dockerignore">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -129,6 +139,9 @@
         <option value="$PROJECT_DIR$/StartSolution.sh" />
         <option value="$PROJECT_DIR$/PatientAccountAPI/Controller/patient.controller.css" />
         <option value="$PROJECT_DIR$/PatientAccountAPI/Model/patient.model.ts" />
+        <option value="$PROJECT_DIR$/Node.Infastructure.Messaging/IMessagePublisher.ts" />
+        <option value="$PROJECT_DIR$/Node.Infastructure.Messaging/RabbitMQMessagePublisher.js" />
+        <option value="$PROJECT_DIR$/PatientAccountAPI/Event/patientRegistered.event.ts" />
         <option value="$PROJECT_DIR$/PatientAccountAPI/Controller/patient.controller.ts" />
       </list>
     </option>
@@ -177,6 +190,11 @@
             <path>
               <item name="SolutionArchitectureAssignmentNode" type="b2602c69:ProjectViewProjectNode" />
               <item name="SolutionArchitectureAssignmentNode" type="462c0819:PsiDirectoryNode" />
+              <item name="Node.Infastructure.Messaging" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SolutionArchitectureAssignmentNode" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SolutionArchitectureAssignmentNode" type="462c0819:PsiDirectoryNode" />
               <item name="PatientAccountAPI" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -184,6 +202,12 @@
               <item name="SolutionArchitectureAssignmentNode" type="462c0819:PsiDirectoryNode" />
               <item name="PatientAccountAPI" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SolutionArchitectureAssignmentNode" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SolutionArchitectureAssignmentNode" type="462c0819:PsiDirectoryNode" />
+              <item name="PatientAccountAPI" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SolutionArchitectureAssignmentNode" type="b2602c69:ProjectViewProjectNode" />
@@ -239,28 +263,28 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1558081366526</updated>
-      <workItem from="1558081370977" duration="4109000" />
+      <workItem from="1558081370977" duration="8404000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4109000" />
+    <option name="totallyTimeSpent" value="8404000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="956" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24954791" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24954791" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.3298611" />
+      <window_info anchor="bottom" id="Terminal" weight="0.3298611" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3298611" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -324,17 +348,38 @@
     <entry file="file://$PROJECT_DIR$/PatientAccountAPI/Controller/patient.controller.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/Node.Infastructure.Messaging/IMessagePublisher.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="58" lean-forward="true" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Node.Infastructure.Messaging/RabbitMQMessagePublisher.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PatientAccountAPI/Model/patient.model.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="44" column="25" selection-start-line="44" selection-start-column="25" selection-end-line="44" selection-end-column="25" />
+        <state relative-caret-position="337">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PatientAccountAPI/Event/patientRegistered.event.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PatientAccountAPI/Controller/patient.controller.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="82" selection-start-line="8" selection-start-column="82" selection-end-line="8" selection-end-column="82" />
+        <state relative-caret-position="318">
+          <caret line="55" column="58" lean-forward="true" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
         </state>
       </provider>
     </entry>
