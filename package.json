@@ -1,0 +1,23 @@
+{
+  "name": "solutionarchitectureassignmentnode",
+  "version": "1.0.0",
+  "description": "Case – Hospital \\ Customer: Braphia General, a hospital group with three different locations in the Brabant area. \\ The different processes as described by various stakeholders:   * \tThe patient schedules an appointment with the hospital. If the patient is not yet registered, registration information needs to be entered.   *\tScheduling an appointment is only possible based on a referral from the general practitioner.  *\tAn appointment is scheduled with a specific physician.  *\tThe patient or the hospital can change the appointment to a different date/time.  *\tThe evening before an appointment occurs, the patient is notified.  *\tAt the scheduled date/time, the patient notifies the desk receptionist of his arrival. If this is a patient’s first visit to Braphia, the patient should show a piece of identification.  *\tA patient is either late, early, on time, or doesn’t show up at all.  *\tThe patient fills in a relevant questionnaire on current health.  *\tThe scheduled physician is notified of the patient’s arrival.  *\tBefore an exam, the physician reads the patient’s medical history.  *\tDuring the exam, the physician appends the patient’s medical history.  *\tThe physician orders further analysis, for example an x-ray, or a blood test. \t *\tThe physician prescribes required medication.  *\tBlood tests are ordered from the central laboratory in the primary location.    *\tThe desk receptionist schedules a follow-up appointment.  *\tThe patient is notified of analysis results during the follow-up.   *\tThe general practitioner is notified of results.  *\tThe pharmacy is notified of required medication.  *\tEach action is registered and billed to the patient’s insurance company.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JKannekens/SolutionArchitectureAssignmentNode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JKannekens/SolutionArchitectureAssignmentNode/issues"
+  },
+  "homepage": "https://github.com/JKannekens/SolutionArchitectureAssignmentNode#readme",
+  "dependencies": {
+    "@types/node": "^12.0.2",
+    "mongoose": "^5.5.9"
+  }
+}
