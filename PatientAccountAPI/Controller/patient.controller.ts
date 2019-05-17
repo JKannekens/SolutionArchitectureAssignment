@@ -1,12 +1,13 @@
 const messagePublisher = require('../../Node.Infastructure.Messaging/IMessagePublisher');
 const Patient = require('../Model/patient.model');
-let patientRegistered = require('../Event/patientRegistered.event')
+let registerPatient = require('../Command/registerpatient.command');
+let patientRegistered = require('../Event/patientRegistered.event');
 
 module.exports = {
-    async getPatient(req, res, next) {
-        let patientnr = req.body.patientNr;
+    async getPatientByBsn(req, res, next) {
+        let bsn = req.body.bsn;
 
-        Patient.find({patientNr: patientnr})
+        Patient.find({bsn: bsn})
             .then((patient) => {
                 res.sendStatus(200)
                     .contentType('application/json')
@@ -35,25 +36,42 @@ module.exports = {
             })
     },
 
-    async registerPatient(req, res, next) {
-        let newPatient = new Patient();
-        newPatient.bsn = req.body.bsn;
-        newPatient.firstName = req.body.firstName;
-        newPatient.middlename = req.body.middleName;
-        newPatient.lastname = req.body.lastName;
-        newPatient.age = req.body.age;
-        newPatient.streetName = req.body.streetName;
-        newPatient.houseNr = req.body.houseNr;
-        newPatient.postalCode = req.body.postalCode;
-        newPatient.city = req.body.city;
-        newPatient.deceased = false;
+    async editPatientByBsn(req, res, next) {
+        let bsn = req.body.bsn;
+        let editedPatient = req.body.patient;
 
-        Patient.find({bsn: newPatient.bsn})
+        Patient.findOneAndUpdate({bsn: bsn}, editedPatient)
+            .then((patient) => {
+                res.sendStatus(200)
+                    .contentType('application/json')
+                    .send(patient)
+
+            })
+            .catch((err) => {
+                res.sendStatus(500)
+                    .json({msg: "Something went wrong, try again later"})
+                console.log(err);
+            });
+    },
+
+    async registerPatient(req, res, next) {
+        registerPatient.bsn = req.body.bsn;
+        registerPatient.firstName = req.body.firstName;
+        registerPatient.middlename = req.body.middleName;
+        registerPatient.lastname = req.body.lastName;
+        registerPatient.age = req.body.age;
+        registerPatient.streetName = req.body.streetName;
+        registerPatient.houseNr = req.body.houseNr;
+        registerPatient.postalCode = req.body.postalCode;
+        registerPatient.city = req.body.city;
+        registerPatient.deceased = false;
+
+        Patient.find({bsn: registerPatient.bsn})
             .then((patient) => {
                 if(patient === null) {
-                    Patient.create(newPatient)
-                        .then((response) => {
-                            patientRegistered = newPatient;
+                    Patient.create(registerPatient)
+                        .then(() => {
+                            patientRegistered = registerPatient;
                             messagePublisher(patientRegistered.messageType, patientRegistered, "");
                             res.sendStatus(200)
                                 .json({msg: "Patient created"});
