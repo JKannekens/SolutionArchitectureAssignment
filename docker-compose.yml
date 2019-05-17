@@ -30,6 +30,14 @@ services:
     volumes:
     - mongodata:/data/db
 
+  logserver:
+    image: datalust/seq:latest
+    container_name: logserver
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
+
 volumes:
   sqlserverdata:
     external: true    
