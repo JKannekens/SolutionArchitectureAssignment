@@ -1,7 +1,6 @@
 var amqp = require('amqplib/callback_api');
-const _iMessagePublisher = require('IMessagePublisher')
 
-amqp.connect('amqp://localhost', function(error0, connection) {
+amqp.connect('amqp://rabbitmquser:DEBmbwkSrzy9D1T9cJfa@localhost', function(error0, connection) {
     if (error0) {
         throw error0;
     }
@@ -11,14 +10,17 @@ amqp.connect('amqp://localhost', function(error0, connection) {
         }
 
         var queue = 'hello';
-        var msg = 'Hello World!';
+        var msg = {
+            name: "test",
+            age: 12
+        };
 
         channel.assertQueue(queue, {
             durable: false
         });
-        channel.sendToQueue(queue, Buffer.from(msg));
+        channel.sendToQueue(queue, Buffer.from(JSON.stringify(msg)));
 
-        console.log(" [x] Sent %s", msg);
+        console.log(" [x] Sent %s", JSON.stringify(msg));
     });
     setTimeout(function() {
         connection.close();
