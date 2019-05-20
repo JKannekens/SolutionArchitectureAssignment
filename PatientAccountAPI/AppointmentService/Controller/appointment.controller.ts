@@ -1,6 +1,6 @@
-const Appointment = require('../../Model/appointment.model');
-let createPatientAppointment = require('../Command/createPatientAppointment.command');
-let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event');
+const Appointment = require('../../Model/appointment.model.ts');
+let createPatientAppointment = require('../Command/createPatientAppointment.command.ts');
+// let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event.ts');
 
 module.exports = {
     async getAppointmentsByDate(req, res, next) {

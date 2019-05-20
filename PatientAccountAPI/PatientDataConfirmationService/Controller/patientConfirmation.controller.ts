@@ -1,5 +1,5 @@
-const Patient = require('../../Model/patient.model');
-let patientConfirmatinonCommand = require('../Command/confirmPatient.command');
+const Patient = require('../../Model/patient.model.ts');
+let patientConfirmatinonCommand = require('../Command/confirmPatient.command.ts');
 
 module.exports = {
 
