@@ -29,8 +29,7 @@ const ItemSchema = new mongoose.Schema({
 Item = mongoose.model('item', ItemSchema);
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
-
-
+app.use(bodyParser.json({ extended: false }));
 
 
 app.get('/', (req, res) => {
@@ -40,7 +39,7 @@ app.get('/', (req, res) => {
 //Post route
 app.post('/item/add', (req, res) => {
   const newItem = new Item({
-    name: "test"
+    name: req.body.name
   });
 
   newItem.save().then(item => res.redirect('/'));
