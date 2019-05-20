@@ -27,8 +27,8 @@ services:
     image: mongo
     ports:
     - "27017:27017"
-    volumes:
-    - mongodata:/data/db
+#    volumes:
+#    - mongodata:/data/db
 
   logserver:
     image: datalust/seq:latest
@@ -38,11 +38,24 @@ services:
     environment:
       - ACCEPT_EULA=Y
 
+  patientaccountapi:
+    image: solutionarchitectureassignment/patientaccountapi:latest
+    build: ./PatientAccountAPI
+#    depends_on:
+#      - rabbitmq
+#      - mongo
+    links:
+      - mongo
+    ports:
+      - "8000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
 volumes:
   sqlserverdata:
     external: true    
   rabbitmqdata:
     external: true
-  mongodata:
-    external: true
+#  mongodata:
+#    external: true
     

@@ -10,8 +10,10 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 8000
 # ENV NODE_ENV http://*:8080
 # HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:7000/hc || exit 1
 
-CMD [ "npm", "start" ]
+RUN npm install -g nodemon
+
+CMD [ "nodemon", "server.js" ]
