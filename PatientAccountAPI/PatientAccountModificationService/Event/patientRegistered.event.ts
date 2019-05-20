@@ -1,4 +1,4 @@
-// class CustomerRegistered {
+// class PatientRegistered {
 //
 //     public bsn: Number;
 //     public password: String;
@@ -12,7 +12,7 @@
 //     public city: String;
 //     public deceased: Boolean;
 //
-//     public CustomerRegistered(patientId, bsn, password, firstName, middleName, lastName, age, streetName, houseNr, postalCode, city, deceased) {
+//     public PatientRegistered(patientId, bsn, password, firstName, middleName, lastName, age, streetName, houseNr, postalCode, city, deceased) {
 //         this.bsn = bsn;
 //         this.password = password;
 //         this.firstName = firstName;
