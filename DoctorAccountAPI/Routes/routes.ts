@@ -1,13 +1,13 @@
-const DoctorAccountContorller = require('../DoctorAccountModificationService/Controller/doctor.controller');
+const DoctorAccountController = require('../DoctorAccountModificationService/Controller/doctor.controller');
 const DoctorConfirmationController = require('../DoctorDataConfirmationService/Controller/doctorConfirmation.controller');
 
 module.exports = (app) => {
     //Account
-    app.post('/api/doctorAccount/getDoctorById', DoctorAccountContorller.getDoctorById);
-    app.post('/api/doctorAccount/getDoctorByLastName', DoctorAccountContorller.getDoctorByLastName);
-    app.post('/api/doctorAccount/registerDoctor', DoctorAccountContorller.registerDoctor);
-    app.put('/api/doctorAccount/editDoctor', DoctorAccountContorller.editDoctorById);
-    app.delete('/api/doctorAccount/deleteDoctor', DoctorAccountContorller.deleteDoctor);
+    app.post('/api/doctorAccount/getDoctorById', DoctorAccountController.getDoctorById);
+    app.post('/api/doctorAccount/getDoctorByLastName', DoctorAccountController.getDoctorByLastName);
+    app.post('/api/doctorAccount/registerDoctor', DoctorAccountController.registerDoctor);
+    app.put('/api/doctorAccount/editDoctor', DoctorAccountController.editDoctorById);
+    app.delete('/api/doctorAccount/deleteDoctor', DoctorAccountController.deleteDoctor);
 
     //Confirmation
     app.post('/api/doctorConfirmation/loginDoctor', DoctorConfirmationController.loginDoctor);
