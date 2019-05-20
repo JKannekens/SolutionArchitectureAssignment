@@ -31,7 +31,7 @@ module.exports = {
             })
             .catch((err) => {
                 res.sendStatus(500)
-                    .json({msg: "Patient does not exist"})
+                    .json({msg: "Patient does not exist"});
                 console.log(err);
             })
     },
@@ -49,7 +49,7 @@ module.exports = {
             })
             .catch((err) => {
                 res.sendStatus(500)
-                    .json({msg: "Something went wrong, try again later"})
+                    .json({msg: "Something went wrong, try again later"});
                 console.log(err);
             });
     },

@@ -1,11 +1,11 @@
 module.exports = {
-    loginDoctor(req, res, next) {
+    async loginDoctor(req, res, next) {
         let docterCredentials = req.body.credentials;
 
         //TODO: login
     },
 
-    logoutDoctor(req, res, next) {
+    async logoutDoctor(req, res, next) {
         //TODO: logout
     }
 }

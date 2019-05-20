@@ -1,19 +1,20 @@
 const Patient = require('../../Model/patient.model');
+let patientConfirmatinonCommand = require('../Command/confirmPatient.command');
 
 module.exports = {
 
-    loginPatient(req, res, next) {
-        let patientCredentials = req.body.patientcredentials;
+    async loginPatient(req, res, next) {
+        patientConfirmatinonCommand = req.body.patientcredentials;
 
-        Patient.find({bsn: patientCredentials.bsn})
+        Patient.find({bsn: patientConfirmatinonCommand.bsn})
             .then((patient) => {
-                if(patient.password === patientCredentials.password) {
+                if(patient.password === patientConfirmatinonCommand.password) {
                     //TODO: login
                 }
             })
     },
 
-    logoutPatient(req, res, next) {
+    async logoutPatient(req, res, next) {
         //TODO: logout
     }
 };

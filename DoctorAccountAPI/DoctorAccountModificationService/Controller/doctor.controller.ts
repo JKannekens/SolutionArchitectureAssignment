@@ -3,7 +3,7 @@ let registerDoctor = require('../Command/registerdoctor.command');
 
 module.exports = {
 
-    getDoctorById(req, res, next) {
+    async getDoctorById(req, res, next) {
         let doctorId = req.body.doctorid;
 
         Doctor.find({doctorId: doctorId})
@@ -24,7 +24,7 @@ module.exports = {
             });
     },
 
-    getDoctorByLastName(req, res, next) {
+    async getDoctorByLastName(req, res, next) {
         let lastName = req.body.lastname;
 
         Doctor.find({lastName: lastName})
@@ -45,7 +45,7 @@ module.exports = {
             })
     },
 
-    registerDoctor(req, res, next) {
+    async registerDoctor(req, res, next) {
         registerDoctor = req.body.doctor;
 
         Doctor.find({lastName: registerDoctor.lastName})
@@ -84,7 +84,7 @@ module.exports = {
             })
     },
 
-    editDoctorById(req, res, next) {
+    async editDoctorById(req, res, next) {
         let editedDoctor = req.body.doctor;
 
         Doctor.find({doctorId: editedDoctor.doctorId})
@@ -113,7 +113,7 @@ module.exports = {
             })
     },
 
-    deleteDoctor(req, res, next) {
+    async deleteDoctor(req, res, next) {
         let doctorId = req.body.doctorid;
 
         Doctor.find({doctorId: doctorId})

@@ -3,7 +3,7 @@ let createPatientAppointment = require('../Command/createPatientAppointment.comm
 let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event');
 
 module.exports = {
-    getAppointmentsByDate(req, res, next) {
+    async getAppointmentsByDate(req, res, next) {
         let date = req.body.date;
 
         Appointment.find({date: date})
@@ -19,7 +19,7 @@ module.exports = {
             });
     },
 
-    getAppointmentById(req, res, next) {
+    async getAppointmentById(req, res, next) {
         let appointmentId = req.body.appointmentid;
 
         Appointment.find({appointmentId: appointmentId})
@@ -40,7 +40,7 @@ module.exports = {
             });
     },
 
-    createAppointment(req, res, next) {
+    async createAppointment(req, res, next) {
         createPatientAppointment = req.body.appointmentrequest;
 
         Appointment.find({datetime: createPatientAppointment.date})
@@ -72,7 +72,7 @@ module.exports = {
             });
     },
 
-    editAppointmentById(req, res, next) {
+    async editAppointmentById(req, res, next) {
         let editedAppointment = req.body.appointment;
 
         Appointment.findOneAndUpdate({appointmentId: editedAppointment.appointmentId})
@@ -88,7 +88,7 @@ module.exports = {
             });
     },
 
-    deleteAppointmentById(req, res, next) {
+    async deleteAppointmentById(req, res, next) {
         let appointment = req.body.appointment;
 
         Appointment.findOne({appointmentId: appointment.appointmentId})
