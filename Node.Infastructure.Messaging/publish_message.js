@@ -1,5 +1,5 @@
-var publish = require("./Publish.js");
+var publish = require("./RabbitMQMessagePublisher.js");
 
-publish.publish("doctor", "doctor.update", "Doctor was appointed");
-publish.publish("doctor", "doctor.create", "Doctor registered");
-publish.publish("patient", "patient.create","patient registered");
+publish.publish("doctor", "doctor.update", {"doctorId": 1, "patientID": 2});
+publish.publish("doctor", "doctor.create", {"firstname": "piet", "lastname": "hendriks"});
+publish.publish("patient", "patient.create",{"firstname": "Cas", "lastname": "de Pender", "dead": false});

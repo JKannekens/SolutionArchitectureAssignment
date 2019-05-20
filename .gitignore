@@ -119,3 +119,6 @@ msbuild.wrn
 
 # DynamoDB Local files
 .dynamodb/
+
+# workspace
+.idea/
