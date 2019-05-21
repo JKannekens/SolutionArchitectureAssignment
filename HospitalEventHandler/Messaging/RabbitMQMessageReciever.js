@@ -2,25 +2,12 @@ var amqp = require('amqplib/callback_api');
 const Event = require('../Model/event.model.ts');
 const mysql = require('mysql');
 
-const connection = mysql.createConnection({
+const mySQLConfig = {
     host: 'mysql',
     user: 'user',
     password: 'password',
     database: 'hospital'
-});
-
-//
-// connection.connect((err) => {
-//     if (err) throw err;
-//     console.log('Connected!');
-//     connection.query('SELECT * FROM patient', (err,rows) => {
-//         if(err) throw err;
-//         console.log('Data received from Db:\n');
-//         console.log(rows);
-//     });
-// });
-
-
+}
 
 module.exports = {
     receive: function (exchange, arg) {
@@ -63,6 +50,7 @@ module.exports = {
             routingkey: routingkey,
             eventdata: message
         }).then(() => {
+            const connection = mysql.createConnection(mySQLConfig);
             connection.connect();
             if (routingkey.includes("patient.register")) {
                 connection.query('INSERT INTO patient SET ?', message, function(err, result) {

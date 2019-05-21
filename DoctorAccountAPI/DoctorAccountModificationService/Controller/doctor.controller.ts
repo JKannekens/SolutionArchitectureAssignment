@@ -1,4 +1,5 @@
 const Doctor = require('../../Model/doctor.model.ts');
+const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 // let registerDoctor = require('../Command/registerdoctor.command.ts');
 
 module.exports = {
@@ -50,19 +51,11 @@ module.exports = {
 
         Doctor.findOne({ lastName: registerDoctor.lastName })
             .then((doctors) => {
-                let alreadyExists = false;
 
-                if (doctors !== null) {
-                    doctors.filter((doctor) => {
-                        if (doctor.address == registerDoctor.address) {
-                            alreadyExists = true
-                        }
-                    })
-                }
-
-                if (!alreadyExists) {
+                if (doctors === null || doctors.address !== registerDoctor.address ) {
                     Doctor.create(registerDoctor)
                         .then((response) => {
+                            messagePublisher.publish("doctor", "doctor.register", registerDoctor);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(response);
