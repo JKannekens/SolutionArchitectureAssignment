@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:8000",
+  "host": "localhost:8060",
   "basePath": "",
   "tags": [
     {
@@ -58,10 +58,18 @@
           "type": "string"
         }
       }
+    },
+    "deleteDoctor": {
+      "type": "object",
+      "properties": {
+        "doctorId": {
+          "type": "number"
+        }
+      }
     }
   },
   "paths": {
-    "/doctorAccount/getDoctorById": {
+    "/doctor/api/doctorAccount/getDoctorById": {
       "post": {
         "tags": [
           "getDoctorByDoctorId"
@@ -93,7 +101,7 @@
         }
       }
     },
-    "/doctorAccount/getDoctorByLastName": {
+    "/doctor/api/doctorAccount/getDoctorByLastName": {
       "post": {
         "tags": [
           "getDoctorByDoctorLastName"
@@ -125,7 +133,7 @@
         }
       }
     },
-    "/doctorAccount/registerDoctor": {
+    "/doctor/api/doctorAccount/registerDoctor": {
       "post": {
         "tags": [
           "registerDoctor"
@@ -153,6 +161,64 @@
           },
           "400": {
             "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/doctor/api/doctorAccount/editDoctor": {
+      "put": {
+        "tags": [
+          "editDoctor"
+        ],
+        "summary": "Edit a doctor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Doctor we want to edit",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          },
+          "400": {
+            "description": "Failed, bad put data."
+          }
+        }
+      }
+    },
+    "/doctor/api/doctorAccount/deleteDoctor": {
+      "delete": {
+        "tags": [
+          "deleteDoctor"
+        ],
+        "summary": "Delete a doctor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Doctor we want to delete",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed, bad ID."
           }
         }
       }
