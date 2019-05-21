@@ -10,8 +10,25 @@ namespace Send {
 		private static DateTime lastTimeCheck;
 		private static DateTime lastMinuteCheck;
 
+		private static IConnection connection;
+
+		private static bool hasConnection = false;
+
 		static void Main (string[] args) {
-			IConnection connection = CreateConnection ();
+			Console.WriteLine ("----- Time service starting ------");
+
+			while (!hasConnection) {
+				try {
+					connection = CreateConnection ();
+					hasConnection = true;
+				} catch (Exception e) {
+					Console.WriteLine ("Error: " + e.Message);
+					Thread.Sleep (10000);
+				}
+			}
+
+			Console.WriteLine ("----- Time service connected to RabbitMQ ------");
+
 			using (var channel = connection.CreateModel ()) {
 				channel.QueueDeclare (queue: "time",
 					durable : false,
@@ -30,7 +47,8 @@ namespace Send {
 		}
 
 		private static IConnection CreateConnection () {
-			var factory = new ConnectionFactory () { HostName = "localhost" };
+			var factory = new ConnectionFactory ();
+			factory.Uri = new Uri ("amqp://rabbitmquser:DEBmbwkSrzy9D1T9cJfa@rabbitmq");
 			return factory.CreateConnection ();
 		}
 

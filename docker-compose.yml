@@ -51,6 +51,15 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
+  timeservice:
+    image: solutionarchitectureassignment/timeservice:latest
+    build: TimeService
+    container_name: timeservice
+    depends_on:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
 volumes:
   sqlserverdata:
     external: true    
