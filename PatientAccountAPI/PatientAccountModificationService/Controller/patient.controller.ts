@@ -7,14 +7,14 @@ module.exports = {
     async getPatientByBsn(req, res, next) {
         let bsn = req.body.bsn;
 
-        Patient.find({bsn: bsn})
+        Patient.findOne({bsn: bsn})
             .then((patient) => {
-                res.sendStatus(200)
+                res.status(200)
                     .contentType('application/json')
                     .send(patient);
             })
             .catch((err) => {
-                res.sendStatus(500)
+                res.status(500)
                     .json({msg: "Could not find patient"});
                 console.log(err);
             })
@@ -24,13 +24,13 @@ module.exports = {
         let lastname = req.body.lastName;
 
         Patient.find({lastName: lastname})
-            .then((patient) => {
-                res.sendStatus(200)
+            .then((patients) => {
+                res.status(200)
                     .contentType('application/json')
-                    .send(patient)
+                    .send(patients)
             })
             .catch((err) => {
-                res.sendStatus(500)
+                res.status(500)
                     .json({msg: "Patient does not exist"});
                 console.log(err);
             })
@@ -42,13 +42,13 @@ module.exports = {
 
         Patient.findOneAndUpdate({bsn: bsn}, editedPatient)
             .then((patient) => {
-                res.sendStatus(200)
+                res.status(200)
                     .contentType('application/json')
                     .send(patient)
 
             })
             .catch((err) => {
-                res.sendStatus(500)
+                res.status(500)
                     .json({msg: "Something went wrong, try again later"});
                 console.log(err);
             });

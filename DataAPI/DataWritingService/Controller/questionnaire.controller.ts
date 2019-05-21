@@ -9,12 +9,12 @@ module.exports = {
 
         Questionnaire.find({questionnaireId: questionnaireId})
             .then((questionnaire) => {
-                res.sendStatus(200)
+                res.status(200)
                     .contentType('application/json')
                     .send(questionnaire);
             })
             .catch((err) => {
-                res.sendStatus(400)
+                res.status(400)
                     .json({msg: "Error retrieving questionnaire"});
                 console.log(err);
             })
@@ -25,12 +25,12 @@ module.exports = {
 
         Questionnaire.create(createdQuestionnaire)
             .then((resp) => {
-                res.sendStatus(200)
+                res.status(200)
                     .contentType('application/json')
                     .send(resp);
             })
             .catch((err) => {
-                res.sendStatus(400)
+                res.status(400)
                     .json({msg: "Error creating questionnaire"});
                 console.log(err);
             })
@@ -41,12 +41,12 @@ module.exports = {
 
         Questionnaire.findOneAndUpdate({questionnaireId: answerQuestionnaireCommand.questionnaireId}, answerQuestionnaireCommand)
             .then((resp) => {
-                res.sendStatus(200)
+                res.status(200)
                     .contentType('application/json')
                     .send(resp);
             })
             .catch((err) => {
-                res.sendStatus(400)
+                res.status(400)
                     .json({msg: "Error editing questionnaire"});
                 console.log(err);
             })
@@ -57,12 +57,12 @@ module.exports = {
 
         Questionnaire.delete({questionnaireId: questionnaireId})
             .then((resp) => {
-                res.sendStatus(200)
+                res.status(200)
                     .contentType('application/json')
                     .send(resp);
             })
             .catch((err) => {
-                res.sendStatus(400)
+                res.status(400)
                     .json({msg: "Error deleting questionnaire"});
                 console.log(err);
             })

@@ -1,8 +1,0 @@
-C:\Users\Max_Koning\Documents\SolutionArchitectureAssignment\CSharpInfrastructure.Messaging\CSharpInfrastructure.Messaging\bin\Debug\netcoreapp2.2\CSharpInfrastructure.Messaging.deps.json
-C:\Users\Max_Koning\Documents\SolutionArchitectureAssignment\CSharpInfrastructure.Messaging\CSharpInfrastructure.Messaging\bin\Debug\netcoreapp2.2\CSharpInfrastructure.Messaging.runtimeconfig.json
-C:\Users\Max_Koning\Documents\SolutionArchitectureAssignment\CSharpInfrastructure.Messaging\CSharpInfrastructure.Messaging\bin\Debug\netcoreapp2.2\CSharpInfrastructure.Messaging.runtimeconfig.dev.json
-C:\Users\Max_Koning\Documents\SolutionArchitectureAssignment\CSharpInfrastructure.Messaging\CSharpInfrastructure.Messaging\bin\Debug\netcoreapp2.2\CSharpInfrastructure.Messaging.dll
-C:\Users\Max_Koning\Documents\SolutionArchitectureAssignment\CSharpInfrastructure.Messaging\CSharpInfrastructure.Messaging\obj\Debug\netcoreapp2.2\CSharpInfrastructure.Messaging.csproj.CoreCompileInputs.cache
-C:\Users\Max_Koning\Documents\SolutionArchitectureAssignment\CSharpInfrastructure.Messaging\CSharpInfrastructure.Messaging\obj\Debug\netcoreapp2.2\CSharpInfrastructure.Messaging.AssemblyInfoInputs.cache
-C:\Users\Max_Koning\Documents\SolutionArchitectureAssignment\CSharpInfrastructure.Messaging\CSharpInfrastructure.Messaging\obj\Debug\netcoreapp2.2\CSharpInfrastructure.Messaging.AssemblyInfo.cs
-C:\Users\Max_Koning\Documents\SolutionArchitectureAssignment\CSharpInfrastructure.Messaging\CSharpInfrastructure.Messaging\obj\Debug\netcoreapp2.2\CSharpInfrastructure.Messaging.csprojAssemblyReference.cache

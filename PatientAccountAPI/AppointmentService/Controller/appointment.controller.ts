@@ -8,33 +8,33 @@ module.exports = {
 
         Appointment.find({ date: date })
             .then((appointments) => {
-                res.sendStatus(200)
+                res.status(200)
                     .contentType('application/json')
                     .send(appointments);
             })
             .catch((err) => {
-                res.sendStatus(500)
+                res.status(500)
                     .json({ msg: "Error getting appointments, try again later" });
                 console.log(err);
             });
     },
 
     async getAppointmentById(req, res, next) {
-        let appointmentId = req.body.appointmentid;
+        let appointmentId = req.body.appointmentId;
 
-        Appointment.find({ appointmentId: appointmentId })
+        Appointment.findOne({ appointmentId: appointmentId })
             .then((appointment) => {
                 if (appointment !== null) {
-                    res.sendStatus(200)
+                    res.status(200)
                         .contentType('application/json')
                         .send(appointment);
                 } else {
-                    res.sendStatus(400)
+                    res.status(400)
                         .json({ msg: "Appointment doesn't exist" });
                 }
             })
             .catch((err) => {
-                res.sendStatus(500)
+                res.status(500)
                     .json({ msg: "Error getting appointment" });
                 console.log(err);
             });
@@ -76,12 +76,12 @@ module.exports = {
 
         Appointment.findOneAndUpdate({ appointmentId: editedAppointment.appointmentId })
             .then((response) => {
-                res.sendStatus(200)
+                res.status(200)
                     .contentType('application/json')
                     .send(response);
             })
             .catch((err) => {
-                res.sendStatus(500)
+                res.status(500)
                     .json({ msg: "Error editing appointment" });
                 console.log(err);
             });
@@ -95,12 +95,12 @@ module.exports = {
                 if (response !== null) {
                     Appointment.findOneAndDelete({ appointmentId: appointment.appointmentId })
                         .then((response) => {
-                            res.sendStatus(200)
+                            res.status(200)
                                 .contentType('application/json')
                                 .send(response);
                         })
                         .catch((err) => {
-                            res.sendStatus(500)
+                            res.status(500)
                                 .json({ msg: "Error deleting apppointment, try again later" });
                             console.log(err);
                         })

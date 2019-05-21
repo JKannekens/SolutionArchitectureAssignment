@@ -10,16 +10,16 @@ module.exports = {
         Doctor.find({ doctorId: doctorId })
             .then((doctor) => {
                 if (doctor !== null) {
-                    res.sendStatus(200)
+                    res.status(200)
                         .contentType('application/json')
                         .send(doctor);
                 } else {
-                    res.sendStatus(400)
+                    res.status(400)
                         .json({ msg: "Could not find doctor" });
                 }
             })
             .catch((err) => {
-                res.sendStatus(500)
+                res.status(500)
                     .json({ msg: "Something went wrong, try again later" });
                 console.log(err);
             });
@@ -31,11 +31,11 @@ module.exports = {
         Doctor.find({ lastName: lastName })
             .then((doctor) => {
                 if (doctor !== null) {
-                    res.sendStatus(200)
+                    res.status(200)
                         .contentType('application/json')
                         .send(doctor);
                 } else {
-                    res.sendStatus(400)
+                    res.status(400)
                         .json({ msg: "Could not find doctor" });
                 }
             })
@@ -85,22 +85,22 @@ module.exports = {
                 if (doctor !== null) {
                     Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId })
                         .then((resp) => {
-                            res.sendStatus(200)
+                            res.status(200)
                                 .contentType('application/json')
                                 .send(resp);
                         })
                         .catch((err) => {
-                            res.sendStatus(500)
+                            res.status(500)
                                 .json({ msg: "Something went wrong editing, try again later" })
                             console.log(err);
                         });
                 } else {
-                    res.sendStatus(400)
+                    res.status(400)
                         .json({ msg: "Could not find doctor" });
                 }
             })
             .catch((err) => {
-                res.sendStatus(500)
+                res.status(500)
                     .json({ msg: "Error finding doctor" });
                 console.log(err);
             })
@@ -114,22 +114,22 @@ module.exports = {
                 if (doctor !== null) {
                     Doctor.findOneAndDelete({ doctorId: doctorId })
                         .then((resp) => {
-                            res.sendStatus(200)
+                            res.status(200)
                                 .contentType('application/json')
                                 .send(res);
                         })
                         .catch((err) => {
-                            res.sendStatus(500)
+                            res.status(500)
                                 .json({ msg: "Could not delete doctor" });
                             console.log(err);
                         });
                 } else {
-                    res.sendStatus(400)
+                    res.status(400)
                         .json({ msg: "Doctor does not exist in system" });
                 }
             })
             .catch((err) => {
-                res.sendStatus(400)
+                res.status(400)
                     .json({ msg: "Error looking for doctor in system" });
                 console.log(err);
             })
