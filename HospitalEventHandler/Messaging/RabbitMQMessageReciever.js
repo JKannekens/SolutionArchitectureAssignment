@@ -55,19 +55,26 @@ module.exports = {
             connection.connect();
             if (routingkey.includes("patient.register")) {
                 connection.query('INSERT INTO patient SET ?', message, function(err, result) {
-                    console.log(result);
+                    console.log(err);
+                });
+            } else if (routingkey.includes("patient.delete")) {
+                connection.query('DELETE FROM patient WHERE bsn = ' + message.bsn, function (err, result) {
+                    console.log(err);
                 });
             } else if (routingkey.includes("doctor.register")) {
                 connection.query('INSERT INTO doctor SET ?', message, function(err, result) {
-                    console.log(result);
+                    console.log(err);
+                });
+            } else if (routingkey.includes("doctor.delete")) {
+                connection.query('DELETE FROM doctor WHERE doctorId = ' + message.doctorId, function (err, result) {
+                    console.log(err);
                 });
             } else if (routingkey.includes("appointment.create")) {
-                console.log("appointment create");
-                console.log(message);
                 connection.query('INSERT INTO appointment SET ?', message, function (err, result) {
                     console.log(err);
                 });
             }
+
             connection.end();
         })
     }

@@ -78,9 +78,9 @@ module.exports = {
     },
 
     async editDoctorById(req, res, next) {
-        let editedDoctor = req.body.doctor;
+        let editedDoctor = req.body;
 
-        Doctor.find({ doctorId: editedDoctor.doctorId })
+        Doctor.findOne({ doctorId: editedDoctor.doctorId })
             .then((doctor) => {
                 if (doctor !== null) {
                     Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId })
@@ -107,16 +107,17 @@ module.exports = {
     },
 
     async deleteDoctor(req, res, next) {
-        let doctorId = req.body.doctorid;
+        let doctorId = req.body.doctorId;
 
-        Doctor.find({ doctorId: doctorId })
+        Doctor.findOne({ doctorId: doctorId })
             .then((doctor) => {
                 if (doctor !== null) {
                     Doctor.findOneAndDelete({ doctorId: doctorId })
                         .then((resp) => {
+                            messagePublisher.publish("doctor", "doctor.delete", req.body);
                             res.status(200)
                                 .contentType('application/json')
-                                .send(res);
+                                .send(resp);
                         })
                         .catch((err) => {
                             res.status(500)

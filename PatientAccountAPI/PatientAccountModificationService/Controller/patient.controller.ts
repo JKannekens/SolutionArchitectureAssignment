@@ -75,5 +75,35 @@ module.exports = {
                     .json({msg: "Something went wrong, try again later"});
                 console.log(err);
             })
+    },
+
+    async deletePatient(req, res, next) {
+        let patientBSN = req.body.bsn;
+
+        Patient.findOne({ bsn: patientBSN })
+            .then((doctor) => {
+                if (doctor !== null) {
+                    Patient.findOneAndDelete({ bsn: patientBSN })
+                        .then((resp) => {
+                            messagePublisher.publish("patient", "patient.delete", req.body);
+                            res.status(200)
+                                .contentType('application/json')
+                                .send(resp);
+                        })
+                        .catch((err) => {
+                            res.status(500)
+                                .json({ msg: "Could not delete patient" });
+                            console.log(err);
+                        });
+                } else {
+                    res.status(400)
+                        .json({ msg: "Patient does not exist in system" });
+                }
+            })
+            .catch((err) => {
+                res.status(400)
+                    .json({ msg: "Error looking for patient in system" });
+                console.log(err);
+            })
     }
 };

@@ -9,6 +9,7 @@ const router = express.Router();
     router.post('/patientAccount/getPatientByLastName', PatientAccountController.getPatientByLastName);
     // router.put('/patientAccount/editPatientByBsn', PatientAccountController.editPatientByBsn);
     router.post('/patientAccount/registerPatient', PatientAccountController.registerPatient);
+    router.delete('/patientAccount/deletePatient', PatientAccountController.deletePatient);
 
     //Confirmation
     // app.post('/patientConfirmation/login', PatientConfirmationController.loginPatient);
