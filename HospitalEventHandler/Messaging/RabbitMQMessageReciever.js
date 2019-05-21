@@ -11,7 +11,6 @@ module.exports = {
                 if (error1) {
                     throw error1;
                 }
-                // var exchange = 'topic_logs';
 
                 channel.assertExchange(exchange, 'topic', {
                     durable: false
@@ -25,9 +24,6 @@ module.exports = {
                     }
                     console.log(' [*] Waiting for logs. To exit press CTRL+C');
 
-                    // args.forEach(function(key) {
-                    //     channel.bindQueue(q.queue, exchange, key);
-                    // });
 
                     channel.bindQueue(q.queue, exchange, arg);
 
