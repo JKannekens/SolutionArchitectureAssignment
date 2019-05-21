@@ -30,6 +30,8 @@ namespace Send {
 			Console.WriteLine ("----- Time service connected to RabbitMQ ------");
 
 			using (var channel = connection.CreateModel ()) {
+				channel.ExchangeDeclare("time", ExchangeType.Topic);
+
 				channel.QueueDeclare (queue: "time",
 					durable : false,
 					exclusive : false,
@@ -88,7 +90,7 @@ namespace Send {
 			var properties = channel.CreateBasicProperties ();
 			properties.Persistent = true;
 
-			channel.BasicPublish (exchange: "",
+			channel.BasicPublish (exchange: "time",
 				routingKey : routingKey,
 				basicProperties : properties,
 				body : body);

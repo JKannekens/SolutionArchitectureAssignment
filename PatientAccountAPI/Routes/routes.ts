@@ -5,8 +5,8 @@ const express = require('express');
 const router = express.Router();
 
     //Account
-    // app.get('/patientAccount/getPatientByBsn', PatientAccountController.getPatientByBsn);
-    // app.get('/patientAccount/getPatientByLastName', PatientAccountController.getPatientByLastName);
+    // app.post('/patientAccount/getPatientByBsn', PatientAccountController.getPatientByBsn);
+    // app.post('/patientAccount/getPatientByLastName', PatientAccountController.getPatientByLastName);
     // app.put('/patientAccount/editPatientByBsn', PatientAccountController.editPatientByBsn);
     // app.post('/patientAccount/registerPatient', PatientAccountController.registerPatient);
     router.post('/patientAccount/registerPatient', PatientAccountController.registerPatient);
@@ -16,8 +16,8 @@ const router = express.Router();
     // app.post('/patientConfirmation/logout', PatientConfirmationController.logoutPatient);
 
     //Appointments
-    // app.get('/appointments/getAppointmentsByDate', AppointmentController.getAppointmentsByDate);
-    // app.get('/appointments/getAppointmentById', AppointmentController.getAppointmentById);
+    // app.post('/appointments/getAppointmentsByDate', AppointmentController.getAppointmentsByDate);
+    // app.post('/appointments/getAppointmentById', AppointmentController.getAppointmentById);
     // app.post('/appointments/createAppointment', AppointmentController.createAppointment);
     // app.put('/appointments/editAppointmentById', AppointmentController.editAppointmentById);
     // app.delete('/appointments/deleteAppointmentById', AppointmentController.deleteAppointmentById);
