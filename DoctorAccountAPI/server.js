@@ -1,3 +1,5 @@
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -21,6 +23,8 @@ app.use("/doctor", doctorRouter);
 app.get('/', (req, res) =>{
   res.send("Hello World");
 });
+
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(8060, () => {
   console.log('Example app listening on port 8060!')
