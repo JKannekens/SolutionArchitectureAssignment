@@ -78,12 +78,12 @@ module.exports = {
     },
 
     async editDoctorById(req, res, next) {
-        let editedDoctor = req.body.doctor;
+        let editedDoctor = req.body;
 
         Doctor.find({ doctorId: editedDoctor.doctorId })
             .then((doctor) => {
                 if (doctor !== null) {
-                    Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId })
+                    Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId }, editedDoctor)
                         .then((resp) => {
                             res.status(200)
                                 .contentType('application/json')
@@ -91,7 +91,7 @@ module.exports = {
                         })
                         .catch((err) => {
                             res.status(500)
-                                .json({ msg: "Something went wrong editing, try again later" })
+                                .json({ msg: "Something went wrong editing, try again later" });
                             console.log(err);
                         });
                 } else {
@@ -107,7 +107,7 @@ module.exports = {
     },
 
     async deleteDoctor(req, res, next) {
-        let doctorId = req.body.doctorid;
+        let doctorId = req.body.doctorId;
 
         Doctor.find({ doctorId: doctorId })
             .then((doctor) => {
@@ -116,7 +116,7 @@ module.exports = {
                         .then((resp) => {
                             res.status(200)
                                 .contentType('application/json')
-                                .send(res);
+                                .send(resp);
                         })
                         .catch((err) => {
                             res.status(500)
