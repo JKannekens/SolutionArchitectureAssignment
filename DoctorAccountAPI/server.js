@@ -8,7 +8,7 @@ const doctorRouter = require("./Routes/routes.ts");
 
 mongoose
     .connect(
-        'mongodb://mongo:27017/doctor',
+        'mongodb://mongo:27017/hospital',
         { useNewUrlParser: true }
     )
     .then(() => console.log('MongoDB Connected'))

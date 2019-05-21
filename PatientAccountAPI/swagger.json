@@ -33,6 +33,9 @@
         "bsn": {
           "type": "number"
         },
+        "password": {
+          "type": "string"
+        },
         "firstName": {
           "type": "string"
         },
@@ -49,7 +52,7 @@
           "type": "string"
         },
         "houseNr": {
-          "type": "string"
+          "type": "number"
         },
         "postalCode": {
           "type": "string"
@@ -61,10 +64,38 @@
           "type": "boolean"
         }
       }
+    },
+    "appointment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
+        },
+        "bsn": {
+          "type": "number"
+        },
+        "doctorId": {
+          "type": "number"
+        },
+        "date": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "deleteAppointment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
+        }
+      }
     }
   },
   "paths": {
-    "/patientAccount/getPatientByBsn": {
+    "/patient/patientAccount/getPatientByBsn": {
       "post": {
         "tags": [
           "getPatientByBsn"
@@ -96,10 +127,42 @@
         }
       }
     },
-    "/patientAccount/registerPatient": {
+    "/patient/patientAccount/getPatientByBsn": {
       "post": {
         "tags": [
-          "registerPatient"
+          "getPatientByLastName"
+        ],
+        "summary": "Get a patient by lastname",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Patient we want to retrieve by lastname",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/patient/patientAccount/registerPatient": {
+      "post": {
+        "tags": [
+          "registerPatientByBsn"
         ],
         "summary": "Register a new patient",
         "parameters": [
@@ -124,6 +187,198 @@
           },
           "400": {
             "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/patient/patientAccount/editPatientByBsn": {
+      "put": {
+        "tags": [
+          "editPatientByBsn"
+        ],
+        "summary": "Edit existing patient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Patient we want to edit",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          },
+          "400": {
+            "description": "Failed, bad put data."
+          }
+        }
+      }
+    },
+    "/appointments/getAppointmentsByDate": {
+      "post": {
+        "tags": [
+          "getAppointmentByDate"
+        ],
+        "summary": "Get appointment by date",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Appointment we want to retrieve by date",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointments/getAppointmentById": {
+      "post": {
+        "tags": [
+          "getAppointmentById"
+        ],
+        "summary": "Get appointment by ID",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Appointment we want to retrieve by ID",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointments/createAppointment": {
+      "post": {
+        "tags": [
+          "createAppointment"
+        ],
+        "summary": "Create appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create appointment",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointments/editAppointmentById": {
+      "put": {
+        "tags": [
+          "editAppointment"
+        ],
+        "summary": "Edit appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Edit appointment",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad put data."
+          }
+        }
+      }
+    },
+    "/appointments/deleteAppointmentById": {
+      "delete": {
+        "tags": [
+          "deleteAppointment"
+        ],
+        "summary": "Delete Appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete appointment",
+            "schema": {
+              "$ref": "#/definitions/deleteAppointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/deleteAppointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad ID."
           }
         }
       }

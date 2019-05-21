@@ -12,7 +12,6 @@ const connection = mysql.createConnection({
     password: 'password',
 });
 
-
 connection.connect((err) => {
     if (err) throw err;
     console.log('Connected!');
@@ -27,13 +26,14 @@ connection.connect((err) => {
         if(err) throw err
     });
 
+    connection.query(`CREATE TABLE IF NOT EXISTS hospital.appointment (id int(11) NOT NULL AUTO_INCREMENT,appointmentId int(11) NOT NULL,bsn int(32) NOT NULL,doctorId int(11) NOT NULL, date datetime NOT NULL, location varchar(255) NOT NULL, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=latin1`, (err) => {
+        if(err) throw err
+    });
+
     console.log("Database with tables created");
 
     connection.end()
 });
-
-
-
 
 mongoose
     .connect(
@@ -45,6 +45,7 @@ mongoose
 
 receive.receive("patient", "#");
 receive.receive("doctor", "#");
+receive.receive("appointment", "#");
 receive.receive("data", "#");
 
 app.use(bodyParser.urlencoded({ extended: false }));

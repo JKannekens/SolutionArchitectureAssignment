@@ -7,7 +7,7 @@ const mySQLConfig = {
     user: 'user',
     password: 'password',
     database: 'hospital'
-}
+};
 
 module.exports = {
     receive: function (exchange, arg) {
@@ -21,7 +21,8 @@ module.exports = {
                 }
 
                 channel.assertExchange(exchange, 'topic', {
-                    durable: false
+                    durable: true,
+                    persistent: true
                 });
 
                 channel.assertQueue('', {
@@ -60,8 +61,13 @@ module.exports = {
                 connection.query('INSERT INTO doctor SET ?', message, function(err, result) {
                     console.log(result);
                 });
+            } else if (routingkey.includes("appointment.create")) {
+                console.log("appointment create");
+                console.log(message);
+                connection.query('INSERT INTO appointment SET ?', message, function (err, result) {
+                    console.log(err);
+                });
             }
-
             connection.end();
         })
     }

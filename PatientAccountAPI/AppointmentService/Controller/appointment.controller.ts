@@ -1,5 +1,5 @@
 const Appointment = require('../../Model/appointment.model.ts');
-let createPatientAppointment = require('../Command/createPatientAppointment.command.ts');
+const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 // let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event.ts');
 
 module.exports = {
@@ -41,37 +41,34 @@ module.exports = {
     },
 
     async createAppointment(req, res, next) {
-        createPatientAppointment = req.body;
+        let createPatientAppointment = req.body;
 
-        Appointment.findOne({ datetime: createPatientAppointment.date })
-            .then((appointments) => {
-                let alreadyTaken = false;
-                if (appointments !== null) {
-                    appointments.filter((appointment) => {
-                        if (appointment.time == createPatientAppointment.time) {
-                            alreadyTaken = true
-                        }
-                    });
-                }
-                if (!alreadyTaken) {
+        Appointment.findOne({ date: createPatientAppointment.date })
+            .then((appointment) => {
+
+                if (appointment === null || appointment.date !== appointment.date ) {
                     Appointment.create(createPatientAppointment)
                         .then((response) => {
+                            messagePublisher.publish("appointment", "appointment.create", createPatientAppointment);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(response);
                         })
                         .catch((err) => {
                             res.status(500)
-                                .json({ msg: "Error creating appointment" });
+                                .json({ msg: "Error creating Appointment" });
                             console.log(err);
-                        })
+                        });
+                } else {
+                    res.status(400)
+                        .json({ msg: "Appointment already exists" });
                 }
             })
             .catch((err) => {
                 res.status(500)
-                    .json({ msg: "Error, try again later" });
+                    .json({ msg: "Something went wrong, try again later" });
                 console.log(err);
-            });
+            })
     },
 
     async editAppointmentById(req, res, next) {

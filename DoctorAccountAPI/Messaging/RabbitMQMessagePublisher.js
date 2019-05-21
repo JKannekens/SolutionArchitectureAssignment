@@ -14,7 +14,8 @@ module.exports = {
                 console.log(msg);
 
                 channel.assertExchange(exchange, 'topic', {
-                    durable: false
+                    durable: true,
+                    persistent: true
                 });
                 channel.publish(exchange, arg, Buffer.from(JSON.stringify(msg)));
                 console.log(" [x] Sent %s: '%s'", arg, msg);
