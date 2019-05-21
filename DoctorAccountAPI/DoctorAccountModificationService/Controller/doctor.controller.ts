@@ -83,7 +83,7 @@ module.exports = {
         Doctor.findOne({ doctorId: editedDoctor.doctorId })
             .then((doctor) => {
                 if (doctor !== null) {
-                    Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId })
+                    Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId }, editedDoctor)
                         .then((resp) => {
                             res.status(200)
                                 .contentType('application/json')
@@ -91,7 +91,7 @@ module.exports = {
                         })
                         .catch((err) => {
                             res.status(500)
-                                .json({ msg: "Something went wrong editing, try again later" })
+                                .json({ msg: "Something went wrong editing, try again later" });
                             console.log(err);
                         });
                 } else {
