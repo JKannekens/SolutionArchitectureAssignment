@@ -37,21 +37,33 @@ module.exports = {
     },
 
     async editPatientByBsn(req, res, next) {
-        let bsn = req.body.bsn;
-        let editedPatient = req.body.patient;
+        let editedPatient = req.body;
 
-        Patient.findOneAndUpdate({bsn: bsn}, editedPatient)
-            .then((patient) => {
-                res.status(200)
-                    .contentType('application/json')
-                    .send(patient)
-
+        Patient.findOne({ bsn: editedPatient.bsn })
+            .then((doctor) => {
+                if (doctor !== null) {
+                    Patient.findOneAndUpdate({ bsn: editedPatient.bsn }, editedPatient)
+                        .then((resp) => {
+                            messagePublisher.publish("patient", "patient.edit", editedPatient);
+                            res.status(200)
+                                .contentType('application/json')
+                                .send(resp);
+                        })
+                        .catch((err) => {
+                            res.status(500)
+                                .json({ msg: "Something went wrong editing, try again later" });
+                            console.log(err);
+                        });
+                } else {
+                    res.status(400)
+                        .json({ msg: "Could not find patient" });
+                }
             })
             .catch((err) => {
                 res.status(500)
-                    .json({msg: "Something went wrong, try again later"});
+                    .json({ msg: "Error finding patient" });
                 console.log(err);
-            });
+            })
     },
 
     async registerPatient(req, res, next) {

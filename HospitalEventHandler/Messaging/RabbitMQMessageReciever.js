@@ -61,6 +61,11 @@ module.exports = {
                 connection.query('DELETE FROM patient WHERE bsn = ' + message.bsn, function (err, result) {
                     console.log(err);
                 });
+            }else if (routingkey.includes("patient.edit")) {
+                connection.query('DELETE FROM patient WHERE bsn = ' + message.bsn);
+                connection.query(`INSERT INTO patient SET ?`, message, function (err, result) {
+                    console.log(err);
+                });
             } else if (routingkey.includes("doctor.register")) {
                 connection.query('INSERT INTO doctor SET ?', message, function(err, result) {
                     console.log(err);
@@ -69,6 +74,11 @@ module.exports = {
                 connection.query('DELETE FROM doctor WHERE doctorId = ' + message.doctorId, function (err, result) {
                     console.log(err);
                 });
+            } else if (routingkey.includes("doctor.edit")) {
+                    connection.query('DELETE FROM doctor WHERE doctorId = ' + message.doctorId);
+                    connection.query(`INSERT INTO doctor SET ?`, message, function (err, result) {
+                        console.log(err);
+                    });
             } else if (routingkey.includes("appointment.create")) {
                 connection.query('INSERT INTO appointment SET ?', message, function (err, result) {
                     console.log(err);

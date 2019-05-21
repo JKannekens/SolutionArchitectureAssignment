@@ -85,6 +85,7 @@ module.exports = {
                 if (doctor !== null) {
                     Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId }, editedDoctor)
                         .then((resp) => {
+                            messagePublisher.publish("doctor", "doctor.edit", editedDoctor);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(resp);
