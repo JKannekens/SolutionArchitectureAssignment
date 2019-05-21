@@ -68,7 +68,7 @@
     "appointment": {
       "type": "object",
       "properties": {
-        "appointment": {
+        "appointmentId": {
           "type": "number"
         },
         "bsn": {
@@ -82,6 +82,14 @@
         },
         "location": {
           "type": "string"
+        }
+      }
+    },
+    "deleteAppointment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
         }
       }
     }
@@ -270,11 +278,107 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/appointment",
+              "$ref": "#/definitions/appointment"
             }
           },
           "400": {
-            "description": "Failed, bad post request."
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointments/createAppointment": {
+      "post": {
+        "tags": [
+          "createAppointment"
+        ],
+        "summary": "Create appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create appointment",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointments/editAppointmentById": {
+      "put": {
+        "tags": [
+          "editAppointment"
+        ],
+        "summary": "Edit appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Edit appointment",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad put data."
+          }
+        }
+      }
+    },
+    "/appointments/deleteAppointmentById": {
+      "delete": {
+        "tags": [
+          "deleteAppointment"
+        ],
+        "summary": "Delete Appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete appointment",
+            "schema": {
+              "$ref": "#/definitions/deleteAppointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/deleteAppointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad ID."
           }
         }
       }
