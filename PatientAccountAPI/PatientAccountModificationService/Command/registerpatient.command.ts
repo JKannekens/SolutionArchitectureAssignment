@@ -12,17 +12,17 @@ class RegisterPatientCommand {
     public city: String;
     public deceased: Boolean;
 
-    public RegisterPatientCommand(patient) {
-        this.bsn = patient.bsn;
-        this.password = patient.password;
-        this.firstName = patient.firstName;
-        this.middleName = patient.middleName;
-        this.lastName = patient.lastName;
-        this.age = patient.age;
-        this.streetName = patient.streetName;
-        this.houseNr = patient.houseNr;
-        this.postalCode = patient.postalCode;
-        this.city = patient.city;
-        this.deceased = patient.deceased;
+    public RegisterPatientCommand(bsn: Number, password: String, firstName: String, middleName: String, lastName: String, age: Number, streetName: String, houseNr: String, postalCode: String, city: String, deceased: Boolean) {
+        this.bsn = bsn;
+        this.password = password;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.age = age;
+        this.streetName = streetName;
+        this.houseNr = houseNr;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.deceased = deceased;
     }
 }

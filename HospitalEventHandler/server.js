@@ -2,26 +2,23 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const patientRouter = require("./Routes/routes.ts");
+const receive = require("./Messaging/RabbitMQMessageReciever.js");
 
 mongoose
     .connect(
-        'mongodb://mongo:27017/hospital',
+        'mongodb://mongo:27017/hospitaleventstore',
         { useNewUrlParser: true }
     )
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
+receive.receive("patient", "#");
+//receive.receive("doctor", "#");
+//receive.receive("data", "#");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ extended: false }));
 
-app.use("/patient", patientRouter);
-
-app.get('/', (req, res) =>{
-  res.send("Hello World");
-})
-
-app.listen(8000, () => {
+app.listen(8010, () => {
   console.log('Example app listening on port 8000!')
 });
