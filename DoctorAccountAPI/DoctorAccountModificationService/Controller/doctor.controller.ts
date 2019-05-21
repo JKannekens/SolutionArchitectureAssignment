@@ -5,9 +5,9 @@ const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 module.exports = {
 
     async getDoctorById(req, res, next) {
-        let doctorId = req.body.doctorid;
+        let doctorId = req.body.doctorId;
 
-        Doctor.find({ doctorId: doctorId })
+        Doctor.findOne({ doctorId: doctorId })
             .then((doctor) => {
                 if (doctor !== null) {
                     res.status(200)
@@ -26,9 +26,9 @@ module.exports = {
     },
 
     async getDoctorByLastName(req, res, next) {
-        let lastName = req.body.lastname;
+        let lastName = req.body.lastName;
 
-        Doctor.find({ lastName: lastName })
+        Doctor.findOne({ lastName: lastName })
             .then((doctor) => {
                 if (doctor !== null) {
                     res.status(200)
@@ -40,7 +40,7 @@ module.exports = {
                 }
             })
             .catch((err) => {
-                res.sendStaus(500)
+                res.status(500)
                     .json({ msg: "Error retrieving Doctor" });
                 console.log(err);
             })
