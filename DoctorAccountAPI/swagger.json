@@ -209,7 +209,7 @@
             "name": "body",
             "description": "Doctor we want to delete",
             "schema": {
-              "$ref": "#/definitions/Doctor"
+              "$ref": "#/definitions/deleteDoctor"
             }
           }
         ],

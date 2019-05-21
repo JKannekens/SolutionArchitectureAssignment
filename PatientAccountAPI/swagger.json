@@ -65,6 +65,14 @@
         }
       }
     },
+    "deletePatient": {
+      "type": "object",
+      "properties": {
+        "bsn": {
+          "type": "number"
+        }
+      }
+    },
     "appointment": {
       "type": "object",
       "properties": {
@@ -162,7 +170,7 @@
     "/patient/patientAccount/registerPatient": {
       "post": {
         "tags": [
-          "registerPatientByBsn"
+          "registerPatient"
         ],
         "summary": "Register a new patient",
         "parameters": [
@@ -219,6 +227,35 @@
           },
           "400": {
             "description": "Failed, bad put data."
+          }
+        }
+      }
+    },
+    "/patient/deletePatient": {
+      "delete": {
+        "tags": [
+          "deletePatient"
+        ],
+        "summary": "Delete Patient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete patient",
+            "schema": {
+              "$ref": "#/definitions/deletePatient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed, bad ID."
           }
         }
       }
