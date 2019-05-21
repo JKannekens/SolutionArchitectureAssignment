@@ -64,11 +64,11 @@ module.exports = {
             eventdata: message
         }).then(() => {
             connection.connect();
-            if (routingkey.includes("patient")) {
+            if (routingkey.includes("patient.register")) {
                 connection.query('INSERT INTO patient SET ?', message, function(err, result) {
                     console.log(result);
                 });
-            } else if (routingkey.includes("doctor")) {
+            } else if (routingkey.includes("doctor.register")) {
                 connection.query('INSERT INTO doctor SET ?', message, function(err, result) {
                     console.log(result);
                 });
