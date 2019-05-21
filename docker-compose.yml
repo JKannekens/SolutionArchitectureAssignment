@@ -48,8 +48,15 @@ services:
       - mongo
     ports:
       - "8000:8000"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+
+  hospitaleventstore:
+    image: solutionarchitectureassignment/hospitaleventhandler:latest
+    build: ./HospitalEventHandler
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - "8010:8010"
 
 volumes:
   sqlserverdata:

@@ -1,12 +1,13 @@
 var amqp = require('amqplib/callback_api');
+const Event = require('../Model/event.model.ts');
 
 module.exports = {
     receive: function (exchange, arg) {
-        amqp.connect('amqp://rabbitmquser:DEBmbwkSrzy9D1T9cJfa@localhost', function(error0, connection) {
+        amqp.connect('amqp://rabbitmquser:DEBmbwkSrzy9D1T9cJfa@rabbitmq', function (error0, connection) {
             if (error0) {
-                throw error0;
+                return setTimeout(module.exports.receive, 10000, exchange,arg);
             }
-            connection.createChannel(function(error1, channel) {
+            connection.createChannel(function (error1, channel) {
                 if (error1) {
                     throw error1;
                 }
@@ -18,7 +19,7 @@ module.exports = {
 
                 channel.assertQueue('', {
                     exclusive: true
-                }, function(error2, q) {
+                }, function (error2, q) {
                     if (error2) {
                         throw error2;
                     }
@@ -30,14 +31,20 @@ module.exports = {
 
                     channel.bindQueue(q.queue, exchange, arg);
 
-                    channel.consume(q.queue, function(msg) {
-                        console.log(" [x] %s:'%s'", msg.fields.routingKey, JSON.parse(msg.content));
+                    channel.consume(q.queue, function (msg) {
+                        module.exports.handleMessage(msg.fields.routingKey,JSON.parse(msg.content));
                     }, {
                         noAck: true
                     });
                 });
             });
         });
+    },
+
+    handleMessage: function (routingkey, message) {
+        Event.create({
+            routingkey: routingkey,
+            eventdata: message
+        });
     }
 };
-
