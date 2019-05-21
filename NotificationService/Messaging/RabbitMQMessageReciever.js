@@ -1,5 +1,4 @@
 var amqp = require('amqplib/callback_api');
-const Event = require('../Model/event.model.ts');
 
 module.exports = {
     receive: function (exchange, arg) {
