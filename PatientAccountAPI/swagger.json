@@ -1,0 +1,132 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "PatientAPI",
+    "description": "Swagger for PatientAPI",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Patients and appointments",
+      "description": "API for patients and appointments"
+    }
+  ],
+  "schemes": [
+    ""
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "Patient": {
+      "type": "object",
+      "properties": {
+        "bsn": {
+          "type": "number"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "age": {
+          "type": "number"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "houseNr": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "deceased": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/patientAccount/getPatientByBsn": {
+      "post": {
+        "tags": [
+          "getPatientByBsn"
+        ],
+        "summary": "Get a patient by BSN",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Patient we want to retrieve by BSN",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/patientAccount/registerPatient": {
+      "post": {
+        "tags": [
+          "registerPatient"
+        ],
+        "summary": "Register a new patient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Patient we want to register",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    }
+  }
+}
