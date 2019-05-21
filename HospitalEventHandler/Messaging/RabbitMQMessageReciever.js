@@ -21,7 +21,8 @@ module.exports = {
                 }
 
                 channel.assertExchange(exchange, 'topic', {
-                    durable: false
+                    durable: true,
+                    persistent: true
                 });
 
                 channel.assertQueue('', {
