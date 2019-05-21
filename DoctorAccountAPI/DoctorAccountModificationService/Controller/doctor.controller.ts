@@ -1,25 +1,25 @@
-const Doctor = require('../../Model/doctor.model');
-let registerDoctor = require('../Command/registerdoctor.command');
+const Doctor = require('../../Model/doctor.model.ts');
+// let registerDoctor = require('../Command/registerdoctor.command.ts');
 
 module.exports = {
 
     async getDoctorById(req, res, next) {
         let doctorId = req.body.doctorid;
 
-        Doctor.find({doctorId: doctorId})
+        Doctor.find({ doctorId: doctorId })
             .then((doctor) => {
-                if(doctor !== null) {
+                if (doctor !== null) {
                     res.sendStatus(200)
                         .contentType('application/json')
                         .send(doctor);
                 } else {
                     res.sendStatus(400)
-                        .json({msg: "Could not find doctor"});
+                        .json({ msg: "Could not find doctor" });
                 }
             })
             .catch((err) => {
                 res.sendStatus(500)
-                    .json({msg: "Something went wrong, try again later"});
+                    .json({ msg: "Something went wrong, try again later" });
                 console.log(err);
             });
     },
@@ -27,59 +27,59 @@ module.exports = {
     async getDoctorByLastName(req, res, next) {
         let lastName = req.body.lastname;
 
-        Doctor.find({lastName: lastName})
+        Doctor.find({ lastName: lastName })
             .then((doctor) => {
-                if(doctor !== null) {
+                if (doctor !== null) {
                     res.sendStatus(200)
                         .contentType('application/json')
                         .send(doctor);
                 } else {
                     res.sendStatus(400)
-                        .json({msg: "Could not find doctor"});
+                        .json({ msg: "Could not find doctor" });
                 }
             })
             .catch((err) => {
                 res.sendStaus(500)
-                    .json({msg: "Error retrieving Doctor"});
+                    .json({ msg: "Error retrieving Doctor" });
                 console.log(err);
             })
     },
 
     async registerDoctor(req, res, next) {
-        registerDoctor = req.body.doctor;
+        let registerDoctor = req.body;
 
-        Doctor.find({lastName: registerDoctor.lastName})
+        Doctor.findOne({ lastName: registerDoctor.lastName })
             .then((doctors) => {
                 let alreadyExists = false;
 
-                if(doctors.length > 0) {
+                if (doctors !== null) {
                     doctors.filter((doctor) => {
-                        if(doctor.address == registerDoctor.address) {
+                        if (doctor.address == registerDoctor.address) {
                             alreadyExists = true
                         }
                     })
                 }
 
-                if(!alreadyExists) {
+                if (!alreadyExists) {
                     Doctor.create(registerDoctor)
                         .then((response) => {
-                            res.sendStatus(200)
+                            res.status(200)
                                 .contentType('application/json')
                                 .send(response);
                         })
                         .catch((err) => {
-                            res.sendStatus(500)
-                                .json({msg: "Error creating Doctor"});
+                            res.status(500)
+                                .json({ msg: "Error creating Doctor" });
                             console.log(err);
                         });
                 } else {
-                    res.sendStatus(400)
-                        .json({msg: "Doctor already exists in system"});
+                    res.status(400)
+                        .json({ msg: "Doctor already exists" });
                 }
             })
             .catch((err) => {
-                res.sendStatus(500)
-                    .json({msg: "Error while searching for doctor"});
+                res.status(500)
+                    .json({ msg: "Something went wrong, try again later" });
                 console.log(err);
             })
     },
@@ -87,10 +87,10 @@ module.exports = {
     async editDoctorById(req, res, next) {
         let editedDoctor = req.body.doctor;
 
-        Doctor.find({doctorId: editedDoctor.doctorId})
+        Doctor.find({ doctorId: editedDoctor.doctorId })
             .then((doctor) => {
-                if(doctor !== null) {
-                    Doctor.findOneAndUpdate({doctorId: editedDoctor.doctorId})
+                if (doctor !== null) {
+                    Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId })
                         .then((resp) => {
                             res.sendStatus(200)
                                 .contentType('application/json')
@@ -98,17 +98,17 @@ module.exports = {
                         })
                         .catch((err) => {
                             res.sendStatus(500)
-                                .json({msg: "Something went wrong editing, try again later"})
+                                .json({ msg: "Something went wrong editing, try again later" })
                             console.log(err);
                         });
                 } else {
                     res.sendStatus(400)
-                        .json({msg: "Could not find doctor"});
+                        .json({ msg: "Could not find doctor" });
                 }
             })
             .catch((err) => {
                 res.sendStatus(500)
-                    .json({msg: "Error finding doctor"});
+                    .json({ msg: "Error finding doctor" });
                 console.log(err);
             })
     },
@@ -116,10 +116,10 @@ module.exports = {
     async deleteDoctor(req, res, next) {
         let doctorId = req.body.doctorid;
 
-        Doctor.find({doctorId: doctorId})
+        Doctor.find({ doctorId: doctorId })
             .then((doctor) => {
-                if(doctor !== null) {
-                    Doctor.findOneAndDelete({doctorId: doctorId})
+                if (doctor !== null) {
+                    Doctor.findOneAndDelete({ doctorId: doctorId })
                         .then((resp) => {
                             res.sendStatus(200)
                                 .contentType('application/json')
@@ -127,17 +127,17 @@ module.exports = {
                         })
                         .catch((err) => {
                             res.sendStatus(500)
-                                .json({msg: "Could not delete doctor"});
+                                .json({ msg: "Could not delete doctor" });
                             console.log(err);
                         });
                 } else {
                     res.sendStatus(400)
-                        .json({msg: "Doctor does not exist in system"});
+                        .json({ msg: "Doctor does not exist in system" });
                 }
             })
             .catch((err) => {
                 res.sendStatus(400)
-                    .json({msg: "Error looking for doctor in system"});
+                    .json({ msg: "Error looking for doctor in system" });
                 console.log(err);
             })
     }

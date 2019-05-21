@@ -1,4 +1,5 @@
 class RegisterDoctorCommand {
+    
     public doctorId: Number;
     public firstName: String;
     public middleName: String;
