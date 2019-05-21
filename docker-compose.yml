@@ -58,6 +58,14 @@ services:
     ports:
       - "8010:8010"
 
+  notificationservice:
+    image: solutionarchitectureassignment/notificationservice:latest
+    build: ./NotificationService
+    links:
+      - rabbitmq
+    ports:
+      - "8050:8050"
+
   timeservice:
     image: solutionarchitectureassignment/timeservice:latest
     build: TimeService
