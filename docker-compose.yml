@@ -49,6 +49,17 @@ services:
     ports:
       - "8000:8000"
 
+  doctoraccountapi:
+    image: solutionarchitectureassignment/doctoraccountapi:latest
+    build: ./DoctorAccountAPI
+#    depends_on:
+#      - rabbitmq
+#      - mongo
+    links:
+      - mongo
+    ports:
+      - "8060:8060"
+
   hospitaleventstore:
     image: solutionarchitectureassignment/hospitaleventhandler:latest
     build: ./HospitalEventHandler
