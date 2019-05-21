@@ -10,10 +10,6 @@ module.exports = {
                 if (error1) {
                     throw error1;
                 }
-                // var exchange = 'topic_logs';
-                // var args = process.argv.slice(2);
-                // var key = (args.length > 0) ? args[0] : 'anonymous.info';
-                // var msg = args.slice(1).join(' ') || 'Hello World!';
                 console.log(arg);
                 console.log(msg);
 
@@ -26,7 +22,6 @@ module.exports = {
 
             setTimeout(function() {
                 connection.close();
-                process.exit(0);
             }, 500);
         });
     }

@@ -1,4 +1,4 @@
-const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher');
+const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 const Patient = require('../../Model/patient.model.ts');
 // let registerPatient = require('../Command/registerpatient.command.ts');
 // let patientRegistered = require('../Event/patientRegistered.event.ts');
@@ -62,8 +62,7 @@ module.exports = {
                 if(patient === null) {
                     Patient.create(registerPatient)
                         .then(() => {
-                            const patientRegistered = registerPatient;
-                            messagePublisher.publish("patient", "patient.register", patientRegistered);
+                            messagePublisher.publish("patient", "patient.register", registerPatient);
                             res.status(200).json({msg: "Patient created"});
                         })
                 } else {
