@@ -58,6 +58,15 @@ services:
     ports:
       - "8010:8010"
 
+  timeservice:
+    image: solutionarchitectureassignment/timeservice:latest
+    build: TimeService
+    container_name: timeservice
+    depends_on:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
 volumes:
   sqlserverdata:
     external: true    
