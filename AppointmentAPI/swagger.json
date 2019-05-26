@@ -47,7 +47,7 @@
         }
       }
     },
-    "deleteAppoontment": {
+    "deleteAppointment": {
       "type": "object",
       "properties": {
         "appointmentId": {
@@ -149,6 +149,67 @@
           },
           "400": {
             "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointments/editAppointmentById": {
+      "put": {
+        "tags": [
+          "editAppointment"
+        ],
+        "summary": "Edit appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Edit appointment",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad put data."
+          }
+        }
+      }
+    },
+    "/appointments/deleteAppointmentById": {
+      "delete": {
+        "tags": [
+          "deleteAppointment"
+        ],
+        "summary": "Delete Appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete appointment",
+            "schema": {
+              "$ref": "#/definitions/deleteAppointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed, bad ID."
           }
         }
       }
