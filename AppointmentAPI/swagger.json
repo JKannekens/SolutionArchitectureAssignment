@@ -1,0 +1,157 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "AppointmentAPI",
+    "description": "Swagger for AppointmentAPI",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8020",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Appointments",
+      "description": "API for appointments"
+    }
+  ],
+  "schemes": [
+    ""
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "Appointment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
+        },
+        "bsn": {
+          "type": "number"
+        },
+        "doctorId": {
+          "type": "number"
+        },
+        "date": {
+          "type": "object"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "deleteAppoontment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/appointment/getAppointmentsByDate": {
+      "post": {
+        "tags": [
+          "getAppointmentsByDate"
+        ],
+        "summary": "Get appointments by date",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Appointments we want to retrieve by date",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointment/getAppointmentById": {
+      "post": {
+        "tags": [
+          "getAppointmentById"
+        ],
+        "summary": "Get an appointment by ID",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Appointment we want to retrieve by ID",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointment/createAppointment": {
+      "post": {
+        "tags": [
+          "createAppointment"
+        ],
+        "summary": "Create an appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Appointment we want to create",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    }
+  }
+}

@@ -88,12 +88,12 @@ module.exports = {
     },
 
     async deleteAppointmentById(req, res, next) {
-        let appointment = req.body.appointment;
+        let appointmentId = req.body;
 
-        Appointment.findOne({ appointmentId: appointment.appointmentId })
+        Appointment.findOne({ appointmentId: appointmentId })
             .then((response) => {
                 if (response !== null) {
-                    Appointment.findOneAndDelete({ appointmentId: appointment.appointmentId })
+                    Appointment.findOneAndDelete({ appointmentId: appointmentId })
                         .then((response) => {
                             res.status(200)
                                 .contentType('application/json')

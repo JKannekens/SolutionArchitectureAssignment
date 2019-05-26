@@ -60,6 +60,17 @@ services:
     environment:
       - ACCEPT_EULA=Y
 
+  appointmentapi:
+    image: solutionarchitectureassignment/appointmentapi:latest
+    build: ./AppointmentAPI
+    #    depends_on:
+    #      - rabbitmq
+    #      - mongo
+    links:
+      - mongo
+    ports:
+      - "8020:8020"
+
   patientaccountapi:
     image: solutionarchitectureassignment/patientaccountapi:latest
     build: ./PatientAccountAPI
