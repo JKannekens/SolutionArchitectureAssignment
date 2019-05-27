@@ -14,8 +14,21 @@ module.exports = {
                 console.log(msg);
 
                 channel.assertExchange(exchange, 'topic', {
-                    durable: false
+                    autoDelete : false,
+                    durable    : false,
+                    arguments  : {
+                        "x-message-ttl" : 300000
+                    }
                 });
+
+
+                // channel.bindQueue('patient' ,{
+                //     autoDelete : false,
+                //     durable    : true,
+                //     arguments  : {
+                //     "x-message-ttl" : 300000
+                // }});
+
                 channel.publish(exchange, arg, Buffer.from(JSON.stringify(msg)));
                 console.log(" [x] Sent %s: '%s'", arg, msg);
             });
