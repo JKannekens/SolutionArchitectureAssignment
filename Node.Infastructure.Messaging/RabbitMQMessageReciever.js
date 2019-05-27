@@ -12,11 +12,16 @@ module.exports = {
                 }
 
                 channel.assertExchange(exchange, 'topic', {
-                    durable: false
+                    durable: false,
+                    persistent: false
                 });
 
                 channel.assertQueue('', {
-                    exclusive: true
+                    autoDelete : false,
+                        durable    : true,
+                        arguments  : {
+                        "x-message-ttl" : 300000
+                    }
                 }, function(error2, q) {
                     if (error2) {
                         throw error2;
