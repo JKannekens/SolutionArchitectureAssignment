@@ -1,6 +1,8 @@
+const confirmDoctorCommand = require('../Command/confirmdoctor.command');
+
 module.exports = {
     async loginDoctor(req, res, next) {
-        let docterCredentials = req.body.credentials;
+        let docterCredentials = confirmDoctorCommand(req.body);
 
         //TODO: login
     },

@@ -1,16 +1,12 @@
-class RegisterDoctorCommand {
-    
-    public doctorId: Number;
-    public firstName: String;
-    public middleName: String;
-    public lastName: String;
-    public specialization: String;
+function RegisterDoctorCommand(request) {
+    let doctor = {
+        doctorId: request.doctorId,
+        firstName: request.firstName,
+        middleName: request.middleName,
+        lastName: request.lastName,
+        specialization: request.specialization,
+    };
+    return doctor;
+};
 
-    public RegisterDoctorCommand(doctorId: Number, firstName: String, middleName: String, lastName: String, specialization: String) {
-        this.doctorId = doctorId;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.specialization = specialization;
-    }
-}
+module.exports = RegisterDoctorCommand;

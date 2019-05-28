@@ -1,9 +1,9 @@
-class ConfirmDoctorCommand {
-    public doctorId: Number;
-    public password: String;
-
-    public ConfirmDoctorCommand(doctorId: Number, password: String) {
-        this.doctorId = doctorId;
-        this.password = password;
-    }
+function ConfirmDoctorCommand(request) {
+    let credentials = {
+        doctorId: request.doctorId,
+        password: request.password
+    };
+    return credentials;
 }
+
+module.exports = ConfirmDoctorCommand;

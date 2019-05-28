@@ -1,28 +1,18 @@
-class RegisterPatientCommand {
+function registerPatientCommand(request) {
+    let patientRegistered = {
+        bsn: request.bsn,
+        password: request.password,
+        firstName: request.firstName,
+        middleName: request.middleName,
+        lastName: request.lastName,
+        age: request.age,
+        streetName: request.streetName,
+        houseNr: request.houseNr,
+        postalCode: request.postalCode,
+        city: request.city,
+        deceased: request.deceased
+    };
+    return patientRegistered;
+};
 
-    public bsn: Number;
-    public password: String;
-    public firstName: String;
-    public middleName: String;
-    public lastName: String;
-    public age: Number;
-    public streetName: String;
-    public houseNr: String;
-    public postalCode: String;
-    public city: String;
-    public deceased: Boolean;
-
-    public RegisterPatientCommand(bsn: Number, password: String, firstName: String, middleName: String, lastName: String, age: Number, streetName: String, houseNr: String, postalCode: String, city: String, deceased: Boolean) {
-        this.bsn = bsn;
-        this.password = password;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.age = age;
-        this.streetName = streetName;
-        this.houseNr = houseNr;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.deceased = deceased;
-    }
-}
+module.exports = registerPatientCommand;

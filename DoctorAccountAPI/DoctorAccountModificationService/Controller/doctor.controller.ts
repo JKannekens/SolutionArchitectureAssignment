@@ -1,6 +1,6 @@
 const Doctor = require('../../Model/doctor.model.ts');
 const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
-// let registerDoctor = require('../Command/registerdoctor.command.ts');
+let registerDoctorCommand = require('../Command/registerdoctor.command.ts');
 
 module.exports = {
 
@@ -47,7 +47,7 @@ module.exports = {
     },
 
     async registerDoctor(req, res, next) {
-        let registerDoctor = req.body;
+        let registerDoctor = registerDoctorCommand(req.body);
 
         Doctor.findOne({ lastName: registerDoctor.lastName })
             .then((doctors) => {

@@ -1,19 +1,12 @@
-import DateTimeFormat = Intl.DateTimeFormat;
+function PatientAppointmentCreatedEvent(request) {
+    let appointment = {
+        appointmentId: request.appointmentId,
+        bsn: request.bsn,
+        doctorId: request.doctorId,
+        date: request.date,
+        location: request.location,
+    };
+    return appointment;
+};
 
-class PatientAppointmentCreatedEvent {
-    public appointmentId: Number;
-    public bsn: Number;
-    public doctorId: Number;
-    public date: Date;
-    public time: Date;
-    public location: String;
-
-    public PatientAppointmentCreatedEvent(appointmentData) {
-        this.appointmentId = appointmentData.appointmentId;
-        this.bsn = appointmentData.bsn;
-        this.doctorId = appointmentData.doctorId;
-        this.date = appointmentData.date;
-        this.time = appointmentData.time;
-        this.location = appointmentData.location;
-    }
-}
+module.exports = PatientAppointmentCreatedEvent;

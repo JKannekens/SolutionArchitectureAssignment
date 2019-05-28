@@ -1,9 +1,9 @@
-class DoctorConfirmedEvent {
-    public doctorId: Number;
-    public password: String;
-
-    public DoctorConfirmedEvent(doctorId: Number, password: String) {
-        this.doctorId = doctorId;
-        this.password = password;
-    }
+function DoctorConfirmedEvent(request) {
+    let credentials = {
+        doctorId: request.doctorId,
+        password: request.password
+    };
+    return credentials;
 }
+
+module.exports = DoctorConfirmedEvent;

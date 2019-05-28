@@ -1,6 +1,6 @@
 const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 const Patient = require('../../Model/patient.model.ts');
-// let registerPatient = require('../Command/registerpatient.command.ts');
+let registerPatient = require('../Command/registerpatient.command.ts');
 // let patientRegistered = require('../Event/patientRegistered.event.ts');
 
 module.exports = {
@@ -67,14 +67,14 @@ module.exports = {
     },
 
     async registerPatient(req, res, next) {
-        const registerPatient = req.body;
+        const registerPatientCmd = registerPatient(req.body);
 
-        Patient.findOne({bsn: registerPatient.bsn})
+        Patient.findOne({bsn: registerPatientCmd.bsn})
             .then((patient) => {
                 if(patient === null) {
-                    Patient.create(registerPatient)
+                    Patient.create(registerPatientCmd)
                         .then(() => {
-                            messagePublisher.publish("patient", "patient.register", registerPatient);
+                            messagePublisher.publish("patient", "patient.register", registerPatientCmd);
                             res.status(200).json({msg: "Patient created"});
                         })
                 } else {

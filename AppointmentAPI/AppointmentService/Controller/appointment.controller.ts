@@ -1,5 +1,8 @@
+// import createPatientAppointmentCommand from '../Command/createPatientAppointment.command';
+
 const Appointment = require('../../Model/appointment.model.ts');
 const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
+let createPatientAppointmentCommand = require('../Command/createPatientAppointment.command.ts');
 // let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event.ts');
 
 module.exports = {
@@ -41,15 +44,15 @@ module.exports = {
     },
 
     async createAppointment(req, res, next) {
-        let createPatientAppointment = req.body;
+        let appointmentToCreate = createPatientAppointmentCommand(req.body);
 
-        Appointment.findOne({ date: createPatientAppointment.date })
+        Appointment.findOne({ date: appointmentToCreate.date })
             .then((appointment) => {
 
                 if (appointment === null || appointment.date !== appointment.date ) {
-                    Appointment.create(createPatientAppointment)
+                    Appointment.create(appointmentToCreate)
                         .then((response) => {
-                            messagePublisher.publish("appointment", "appointment.create", createPatientAppointment);
+                            messagePublisher.publish("appointment", "appointment.create", appointmentToCreate);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(response);
@@ -106,5 +109,5 @@ module.exports = {
                         })
                 }
             });
-    }
+    },
 };

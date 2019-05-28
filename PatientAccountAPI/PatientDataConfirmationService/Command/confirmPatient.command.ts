@@ -1,9 +1,9 @@
-// class ConfirmPatientCommand {
-//     public bsn: Number;
-//     public password: String;
-//
-//     public ConfirmPatientCommand(patientcredentials) {
-//         this.bsn = patientcredentials.bsn;
-//         this.password = patientcredentials.password;
-//     }
-// }
+function ConfirmPatientCommand(request) {
+    let credentials = {
+        bsn: request.bsn,
+        password: request.password
+    };
+    return credentials;
+}
+
+module.exports = ConfirmPatientCommand;

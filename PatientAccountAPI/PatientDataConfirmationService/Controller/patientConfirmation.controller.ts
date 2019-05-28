@@ -4,11 +4,11 @@ let patientConfirmatinonCommand = require('../Command/confirmPatient.command.ts'
 module.exports = {
 
     async loginPatient(req, res, next) {
-        patientConfirmatinonCommand = req.body.patientcredentials;
+        let patientConfirmCmd = patientConfirmatinonCommand(req.body);
 
-        Patient.find({bsn: patientConfirmatinonCommand.bsn})
+        Patient.find({bsn: patientConfirmCmd.bsn})
             .then((patient) => {
-                if(patient.password === patientConfirmatinonCommand.password) {
+                if(patient.password === patientConfirmCmd.password) {
                     //TODO: login
                 }
             })
