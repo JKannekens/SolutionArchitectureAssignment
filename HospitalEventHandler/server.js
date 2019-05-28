@@ -3,14 +3,28 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const receive = require("./Messaging/RabbitMQMessageReciever.js");
-
 const mysql = require('mysql');
+
+
 
 const connection = mysql.createConnection({
     host: 'mysql',
     user: 'user',
     password: 'password',
 });
+
+
+receive.receive("patient", "patient-registered-queue","patient.registered");
+receive.receive("patient", "patient-edited-queue","patient.edited");
+receive.receive("patient", "patient-deleted-queue","patient.deleted");
+
+receive.receive("doctor", "doctor-registered-queue","doctor.registered");
+receive.receive("doctor", "doctor-edited-queue","doctor.edited");
+receive.receive("doctor", "doctor-deleted-queue","doctor.deleted");
+
+receive.receive("appointment", "appointment-created-queue","appointment.created");
+receive.receive("appointment", "appointment-edited-queue","appointment.edited");
+receive.receive("appointment", "appointment-deleted-queue","appointment.deleted");
 
 connection.connect((err) => {
     if (err) throw err;
@@ -43,10 +57,7 @@ mongoose
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
-receive.receive("patient", "#");
-receive.receive("doctor", "#");
-receive.receive("appointment", "#");
-receive.receive("data", "#");
+// receive.receive("data", "#","#");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ extended: false }));

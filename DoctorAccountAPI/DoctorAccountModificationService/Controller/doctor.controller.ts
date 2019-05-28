@@ -55,7 +55,7 @@ module.exports = {
                 if (doctors === null || doctors.address !== registerDoctor.address ) {
                     Doctor.create(registerDoctor)
                         .then((response) => {
-                            messagePublisher.publish("doctor", "doctor.register", registerDoctor);
+                            messagePublisher.publish("doctor", "doctor-registered-queue","doctor.registered", registerDoctor);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(response);
@@ -85,7 +85,7 @@ module.exports = {
                 if (doctor !== null) {
                     Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId }, editedDoctor)
                         .then((resp) => {
-                            messagePublisher.publish("doctor", "doctor.edit", editedDoctor);
+                            messagePublisher.publish("doctor", "doctor-edited-queue","doctor.edited", editedDoctor);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(resp);
@@ -115,7 +115,7 @@ module.exports = {
                 if (doctor !== null) {
                     Doctor.findOneAndDelete({ doctorId: doctorId })
                         .then((resp) => {
-                            messagePublisher.publish("doctor", "doctor.delete", req.body);
+                            messagePublisher.publish("doctor", "doctor-deleted-queue","doctor.deleted", req.body);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(resp);

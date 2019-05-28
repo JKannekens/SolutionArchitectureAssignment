@@ -44,7 +44,7 @@ module.exports = {
                 if (doctor !== null) {
                     Patient.findOneAndUpdate({ bsn: editedPatient.bsn }, editedPatient)
                         .then((resp) => {
-                            messagePublisher.publish("patient", "patient.edit", editedPatient);
+                            messagePublisher.publish("patient", "patient-edited-queue","patient.edited", editedPatient);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(resp);
@@ -74,7 +74,7 @@ module.exports = {
                 if(patient === null) {
                     Patient.create(registerPatientCmd)
                         .then(() => {
-                            messagePublisher.publish("patient", "patient.register", registerPatientCmd);
+                            messagePublisher.publish("patient", "patient-registered-queue","patient.registered", registerPatientCmd);
                             res.status(200).json({msg: "Patient created"});
                         })
                 } else {
@@ -97,7 +97,7 @@ module.exports = {
                 if (doctor !== null) {
                     Patient.findOneAndDelete({ bsn: patientBSN })
                         .then((resp) => {
-                            messagePublisher.publish("patient", "patient.delete", req.body);
+                            messagePublisher.publish("patient", "patient-deleted-queue","patient.deleted", req.body);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(resp);

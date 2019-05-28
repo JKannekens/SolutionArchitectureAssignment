@@ -2,7 +2,7 @@ var amqp = require('amqplib/callback_api');
 
 module.exports = {
     receive: function (exchange, arg) {
-        amqp.connect('amqp://rabbitmquser:DEBmbwkSrzy9D1T9cJfa@localhost', function(error0, connection) {
+        amqp.connect('amqp://rabbitmquser:DEBmbwkSrzy9D1T9cJfa@rabbitmq', function(error0, connection) {
             if (error0) {
                 throw error0;
             }

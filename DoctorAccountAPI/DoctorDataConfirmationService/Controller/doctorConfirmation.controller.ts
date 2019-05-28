@@ -1,4 +1,4 @@
-const confirmDoctorCommand = require('../Command/confirmdoctor.command');
+const confirmDoctorCommand = require('../Command/confirmdoctor.command.ts');
 
 module.exports = {
     async loginDoctor(req, res, next) {
