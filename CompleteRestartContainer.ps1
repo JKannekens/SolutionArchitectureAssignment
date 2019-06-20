@@ -4,7 +4,6 @@ docker rm $(docker ps -a -q)
 echo "====================="
 echo "====== Volumes ======"
 echo "====================="
-docker volume create --name=mysqldata
 docker volume create --name=rabbitmqdata
 docker volume create --name=mongodata
 
