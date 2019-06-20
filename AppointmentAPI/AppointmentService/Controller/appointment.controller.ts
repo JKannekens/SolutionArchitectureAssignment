@@ -3,7 +3,7 @@
 const Appointment = require('../../Model/appointment.model.ts');
 const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 let createPatientAppointmentCommand = require('../Command/createPatientAppointment.command.ts');
-// let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event.ts');
+let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event.ts');
 
 module.exports = {
     async getAppointmentsByDate(req, res, next) {
@@ -50,7 +50,7 @@ module.exports = {
             .then((appointment) => {
 
                 if (appointment === null || appointment.date !== appointment.date ) {
-                    Appointment.create(appointmentToCreate)
+                    Appointment.create(patientAppointmentCreated("appointment.create", appointmentToCreate))
                         .then((response) => {
                             messagePublisher.publish("appointment", "appointment.create", appointmentToCreate);
                             res.status(200)
@@ -104,7 +104,7 @@ module.exports = {
                         })
                         .catch((err) => {
                             res.status(500)
-                                .json({ msg: "Error deleting apppointment, try again later" });
+                                .json({ msg: "Error deleting appointment, try again later" });
                             console.log(err);
                         })
                 }
