@@ -1,13 +1,6 @@
 var amqp = require('amqplib/callback_api');
 const Event = require('../Model/event.model.ts');
-const mysql = require('mysql');
-
-const mySQLConfig = {
-    host: 'mysql',
-    user: 'user',
-    password: 'password',
-    database: 'hospital'
-};
+const Read = require('../Model/read.model.js');
 
 // module.exports = {
 //     receive: function (exchange, arg) {
@@ -146,41 +139,21 @@ module.exports = {
             routingkey: routingkey,
             eventdata: message
         }).then(() => {
-            const connection = mysql.createConnection(mySQLConfig);
-            connection.connect();
             if (routingkey.includes("patient.registered")) {
-                connection.query('INSERT INTO patient SET ?', message, function(err, result) {
-                    console.log(err);
-                });
+                
             } else if (routingkey.includes("patient.deleted")) {
-                connection.query('DELETE FROM patient WHERE bsn = ' + message.bsn, function (err, result) {
-                    console.log(err);
-                });
+                
             }else if (routingkey.includes("patient.edited")) {
-                connection.query('DELETE FROM patient WHERE bsn = ' + message.bsn);
-                connection.query(`INSERT INTO patient SET ?`, message, function (err, result) {
-                    console.log(err);
-                });
+                
             } else if (routingkey.includes("doctor.registered")) {
-                connection.query('INSERT INTO doctor SET ?', message, function(err, result) {
-                    console.log(err);
-                });
+                
             } else if (routingkey.includes("doctor.deleted")) {
-                connection.query('DELETE FROM doctor WHERE doctorId = ' + message.doctorId, function (err, result) {
-                    console.log(err);
-                });
+                
             } else if (routingkey.includes("doctor.edited")) {
-                    connection.query('DELETE FROM doctor WHERE doctorId = ' + message.doctorId);
-                    connection.query(`INSERT INTO doctor SET ?`, message, function (err, result) {
-                        console.log(err);
-                    });
+               
             } else if (routingkey.includes("appointment.created")) {
-                connection.query('INSERT INTO appointment SET ?', message, function (err, result) {
-                    console.log(err);
-                });
+               
             }
-
-            connection.end();
         })
     }
 };

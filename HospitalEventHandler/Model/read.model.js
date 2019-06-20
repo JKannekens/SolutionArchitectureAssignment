@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+mongoose.createConnection('mongodb://mongo:27017/hospitalread').then(() => console.log('MongoDB Connected')).catch(err => console.log(err));
+
 
 const ReadSchema = new Schema({
     patient: {
@@ -107,8 +109,8 @@ const ReadSchema = new Schema({
             type: String,
             required: true
         }
+    }
 });
 
 const Read = mongoose.model('read', ReadSchema);
-
 module.exports = Read;
