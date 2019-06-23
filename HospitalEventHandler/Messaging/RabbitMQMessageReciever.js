@@ -160,9 +160,7 @@ module.exports = {
             } else if (routingkey.includes("doctor.edited")) {
                
             } else if (routingkey.includes("appointment.created")) {
-                Read.create({
-                    appointment: message
-                })
+                Read.findOneAndUpdate({"patient.bsn": message.bsn}, { appointment: message } ).catch((err)=> console.log(err))
             }
         })
     }

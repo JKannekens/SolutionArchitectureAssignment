@@ -1,20 +1,14 @@
-function PatientAppointmentCreatedEvent(request) {
+function PatientAppointmentCreatedEvent(routingkey, request) {
     let appointment = {
-        routingkey: {
-            type: String,
-            required: true
-        },
-        eventdata: {
+        routingkey: routingkey,
+        appointment: {
             appointmentId: request.appointmentId,
             bsn: request.bsn,
             doctorId: request.doctorId,
             date: request.date,
             location: request.location,
         },
-        timestamp: {
-            type: Date,
-            default: Date.now
-        }
+        timestamp: Date.now()
     };
     return appointment;
 }
