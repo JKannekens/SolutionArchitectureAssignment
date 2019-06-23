@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+var conn = mongoose.createConnection('mongodb://mongo:27017/hospitaleventstore');
 
-mongoose.createConnection('mongodb://mongo:27017/hospitaleventstore').then(() => console.log('MongoDB Connected')).catch(err => console.log(err));;
-
-
-const EventSchema = new Schema({
+const Event = conn.model('event', new mongoose.Schema({
     routingkey: {
         type: String,
         required: true
@@ -17,8 +14,6 @@ const EventSchema = new Schema({
         type: Date,
         default: Date.now
     }
-});
-
-const Event = mongoose.model('event', EventSchema);
+}));
 
 module.exports = Event;

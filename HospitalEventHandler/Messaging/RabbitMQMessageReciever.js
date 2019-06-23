@@ -1,5 +1,8 @@
 var amqp = require('amqplib/callback_api');
 const Event = require('../Model/event.model.ts');
+const Doctor = require('../Model/doctor.model.ts');
+const Patient = require('../Model/patient.model.ts');
+const Appointment = require('../Model/appointment.model.ts');
 const Read = require('../Model/read.model.js');
 
 // module.exports = {
@@ -135,24 +138,31 @@ module.exports = {
     handleMessage: function (routingkey, message) {
         console.log("INSIDE HANDLEMESSAGE FUNCTION EVENTHANDLER");
         console.log(routingkey);
+        console.log(message);
         Event.create({
             routingkey: routingkey,
             eventdata: message
         }).then(() => {
             if (routingkey.includes("patient.registered")) {
-                
+                Read.create({
+                    patient: message
+                })
             } else if (routingkey.includes("patient.deleted")) {
                 
             }else if (routingkey.includes("patient.edited")) {
                 
             } else if (routingkey.includes("doctor.registered")) {
-                
+                Read.create({
+                    doctor: message
+                })
             } else if (routingkey.includes("doctor.deleted")) {
                 
             } else if (routingkey.includes("doctor.edited")) {
                
             } else if (routingkey.includes("appointment.created")) {
-               
+                Read.create({
+                    appointment: message
+                })
             }
         })
     }
