@@ -173,8 +173,11 @@ module.exports = {
 
             } else if (routingkey.includes("appointment.edited")) {
                 PatientRead.findOneAndUpdate({"appointment.appointmentId": message.appointmentId}, { appointment: message } ).catch((err) => console.log(err));
+                DoctorRead.findOneAndUpdate({"appointment.appointmentId": message.appointmentId}, { appointment: message } ).catch((err) => console.log(err));
             } else if (routingkey.includes("appointment.deleted")) {
-                PatientRead.findOneAndDelete({"appointment.appointmentId": message.appointmentId} ).catch((err) => console.log(err));
+
+                PatientRead.findOneAndUpdate({"appointment.appointmentId": message.appointmentId}, {$unset: {appointment:1}}).catch((err) => console.log(err));
+                DoctorRead.findOneAndUpdate({"appointment.appointmentId": message.appointmentId}, {$unset: {appointment:1}}).catch((err) => console.log(err));
 
             }
         })
