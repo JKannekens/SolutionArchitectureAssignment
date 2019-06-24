@@ -83,7 +83,6 @@ module.exports = {
                     AppointmentEvent.create(patientAppointmentCreated("appointment.create", appointmentToCreate))
                         .then((response) => {
                             messagePublisher.publish("appointment", "appointment-created-queue", "appointment.created", appointmentToCreate);
-
                             res.status(200)
                                 .contentType('application/json')
                                 .send(response);
@@ -110,9 +109,18 @@ module.exports = {
 
         Appointment.findOneAndUpdate({ appointmentId: editedAppointment.appointmentId })
             .then((response) => {
-                res.status(200)
-                    .contentType('application/json')
-                    .send(response);
+                AppointmentEvent.create(patientAppointmentCreated("appointment.edited", editedAppointment))
+                    .then((response) => {
+                        messagePublisher.publish("appointment", "appointment-edited-queue", "appointment.edited", editedAppointment);
+                        res.status(200)
+                            .contentType('application/json')
+                            .send(response);
+                    })
+                    .catch((err) => {
+                        res.status(500)
+                            .json({ msg: "Error editing Appointment" });
+                        console.log(err);
+                    });
             })
             .catch((err) => {
                 res.status(500)
@@ -122,16 +130,25 @@ module.exports = {
     },
 
     async deleteAppointmentById(req, res, next) {
-        let appointmentId = req.body;
+        let appointment = req.body;
 
-        Appointment.findOne({ appointmentId: appointmentId })
+        Appointment.findOne({ appointmentId: appointment })
             .then((response) => {
                 if (response !== null) {
-                    Appointment.findOneAndDelete({ appointmentId: appointmentId })
+                    Appointment.findOneAndDelete({ appointmentId: appointment })
                         .then((response) => {
-                            res.status(200)
-                                .contentType('application/json')
-                                .send(response);
+                            AppointmentEvent.create(patientAppointmentCreated("appointment.edited", appointment))
+                                .then((response) => {
+                                    messagePublisher.publish("appointment", "appointment-deleted-queue", "appointment.deleted", appointment);
+                                    res.status(200)
+                                        .contentType('application/json')
+                                        .send(response);
+                                })
+                                .catch((err) => {
+                                    res.status(500)
+                                        .json({ msg: "Error deleting Appointment" });
+                                    console.log(err);
+                                })
                         })
                         .catch((err) => {
                             res.status(500)

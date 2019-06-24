@@ -92,14 +92,15 @@ module.exports = {
     },
 
     async deletePatient(req, res, next) {
-        let patientBSN = req.body.bsn;
+        let patient = req.body;
 
-        Patient.findOne({ bsn: patientBSN })
+        Patient.findOne({ bsn: patient.bsn })
             .then((doctor) => {
                 if (doctor !== null) {
-                    Patient.findOneAndDelete({ bsn: patientBSN })
+                    Patient.findOneAndDelete({ bsn: patient.bsn })
                         .then((resp) => {
-                            messagePublisher.publish("patient", "patient-deleted-queue","patient.deleted", req.body);
+                            PatientEvent.create(patientRegistered("patient.deleted", patient));
+                            messagePublisher.publish("patient", "patient-deleted-queue","patient.deleted", patient);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(resp);

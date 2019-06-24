@@ -110,14 +110,15 @@ module.exports = {
     },
 
     async deleteDoctor(req, res, next) {
-        let doctorId = req.body.doctorId;
+        let doctor = req.body.doctorId;
 
-        Doctor.findOne({ doctorId: doctorId })
+        Doctor.findOne({ doctorId: doctor.doctorId })
             .then((doctor) => {
                 if (doctor !== null) {
-                    Doctor.findOneAndDelete({ doctorId: doctorId })
+                    Doctor.findOneAndDelete({ doctorId: doctor.doctorId })
                         .then((resp) => {
-                            messagePublisher.publish("doctor", "doctor-deleted-queue","doctor.deleted", req.body);
+                            DoctorEvent.create(doctorRegistered("doctor.deleted", doctor));
+                            messagePublisher.publish("doctor", "doctor-deleted-queue","doctor.deleted", doctor);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(resp);
