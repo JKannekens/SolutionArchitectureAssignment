@@ -151,7 +151,7 @@ module.exports = {
             } else if (routingkey.includes("patient.deleted")) {
                 
             }else if (routingkey.includes("patient.edited")) {
-                
+                PatientRead.findOneAndUpdate({"patient.bsn": message.bsn}, {doctor: message});
             } else if (routingkey.includes("doctor.registered")) {
                 DoctorRead.create({
                     doctor: message
@@ -159,16 +159,11 @@ module.exports = {
             } else if (routingkey.includes("doctor.deleted")) {
                 
             } else if (routingkey.includes("doctor.edited")) {
-               
+               DoctorRead.findOneAndUpdate({"doctor.doctorId": message.doctorId}, {doctor: message});
             } else if (routingkey.includes("appointment.created")) {
-                PatientRead.findOneAndUpdate({"patient.bsn": message.bsn}, { appointment: message } );
-                DoctorRead.findOneAndUpdate({"doctor.doctorId": message.doctorId}, { appointment: message } );
-                // DoctorRead.findOne({}).then((doctor) => {
-                //     console.log(doctor.doctorId)
-                // });
-                    // DoctorRead.findOneAndUpdate({"doctor.doctorId": message.doctorId}, { appointment: message }).catch((err) => console.log(err));
-
-
+                console.log("Before patient update, before doctor update");
+                PatientRead.findOneAndUpdate({"patient.bsn": message.bsn}, { appointment: message } ).catch((err) => console.log(err));
+                DoctorRead.findOneAndUpdate({"doctor.doctorId": message.doctorId}, { appointment: message } ).catch((err) => console.log(err));
             }
         })
     }
