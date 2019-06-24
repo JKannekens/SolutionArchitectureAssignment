@@ -55,7 +55,7 @@ namespace Send {
 		}
 
 		private static void CheckMinute (IModel channel) {
-			if (DateTime.Now.Subtract (lastMinuteCheck).Minutes > 0) {
+			if (DateTime.Now.Minute != lastMinuteCheck.Minute) {
 				Console.WriteLine ("A minute has passed");
 				lastMinuteCheck = DateTime.Now;
 
@@ -65,7 +65,7 @@ namespace Send {
 		}
 
 		private static void CheckTime (IModel channel) {
-			if (DateTime.Now.Subtract (lastDayCheck).Hours > 0) {
+			if (DateTime.Now.Hour != lastDayCheck.Hour) {
 				Console.WriteLine ("An hour has passed");
 				lastDayCheck = DateTime.Now;
 
@@ -75,11 +75,11 @@ namespace Send {
 		}
 
 		private static void CheckDay (IModel channel) {
-			if (DateTime.Now.Subtract (lastTimeCheck).Days > 0) {
+			if (DateTime.Now.Day != lastTimeCheck.Day) {
 				Console.WriteLine ("A day has passed");
 				lastTimeCheck = DateTime.Now;
 
-				var json = "{ \"Year\":" + "\"" + lastTimeCheck.Year + "\", \"Month\": \"" + lastTimeCheck.Month + "\", \"DayOfTheWeek\": \"" + lastTimeCheck.DayOfWeek + "\" }";
+				var json = "{ \"Year\": + \"" + lastTimeCheck.Year + "\", \"Month\": \"" + lastTimeCheck.Month + "\", \"DayOfTheWeek\": \"" + lastTimeCheck.DayOfWeek + "\" }";
 				PublishEvent (channel, "day", json);
 			}
 		}
