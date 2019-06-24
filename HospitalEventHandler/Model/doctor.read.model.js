@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var conn = mongoose.createConnection('mongodb://mongo:27017/hospitalread');
+var conn = mongoose.createConnection('mongodb://mongo:27017/hospitaldoctorread');
 
 const DoctorRead = conn.model('doctorRead', new mongoose.Schema({
     doctor: {
