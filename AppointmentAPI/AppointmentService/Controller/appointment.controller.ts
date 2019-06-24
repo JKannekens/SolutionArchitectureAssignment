@@ -105,7 +105,7 @@ module.exports = {
     },
 
     async editAppointmentById(req, res, next) {
-        let editedAppointment = req.body.appointment;
+        let editedAppointment = req.body;
 
         Appointment.findOneAndUpdate({ appointmentId: editedAppointment.appointmentId })
             .then((response) => {
@@ -137,7 +137,7 @@ module.exports = {
                 if (response !== null) {
                     Appointment.findOneAndDelete({ appointmentId: appointment.appointmentId })
                         .then((response) => {
-                            AppointmentEvent.create(patientAppointmentCreated("appointment.edited", appointment))
+                            AppointmentEvent.create(patientAppointmentCreated("appointment.deleted", appointment))
                                 .then((response) => {
                                     messagePublisher.publish("appointment", "appointment-deleted-queue", "appointment.deleted", appointment);
                                     res.status(200)
