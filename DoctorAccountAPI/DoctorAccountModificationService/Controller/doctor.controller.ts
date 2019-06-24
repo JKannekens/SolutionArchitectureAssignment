@@ -51,8 +51,6 @@ module.exports = {
     async registerDoctor(req, res, next) {
         let registerDoctor = registerDoctorCommand(req.body);
 
-        console.log(req.body);
-        console.log(registerDoctor);
         Doctor.findOne({ lastName: registerDoctor.lastName })
             .then((doctors) => {
                 if (doctors === null || doctors.address !== registerDoctor.address ) {
@@ -84,14 +82,10 @@ module.exports = {
     async editDoctorById(req, res, next) {
         let editedDoctor = req.body;
 
-        Doctor.findOne({ doctorId: editedDoctor.doctorId })
+        Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId }, editedDoctor)
             .then((doctor) => {
                 if (doctor !== null) {
-                    Object.keys(editedDoctor).forEach(function(k) {
-                        console.log('key: ' + k);
-                        console.log('attr: ' + editedDoctor[k]);
-                    });
-                    DoctorEvent.create(doctorRegistered("doctor.edited", doctor))
+                    DoctorEvent.create(doctorRegistered("doctor.edited", editedDoctor))
                         .then((resp) => {
                             messagePublisher.publish("doctor", "doctor-edited-queue","doctor.edited", editedDoctor);
                             res.status(200)
