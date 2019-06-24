@@ -79,7 +79,7 @@ namespace Send {
 				Console.WriteLine ("A day has passed");
 				lastTimeCheck = DateTime.Now;
 
-				var json = "{ \"Year\": + \"" + lastTimeCheck.Year + "\", \"Month\": \"" + lastTimeCheck.Month + "\", \"DayOfTheWeek\": \"" + lastTimeCheck.DayOfWeek + "\" }";
+				var json = "{ \"Year\": \"" + lastTimeCheck.Year + "\", \"Month\": \"" + lastTimeCheck.Month + "\", \"DayOfTheWeek\": \"" + lastTimeCheck.DayOfWeek + "\" }";
 				PublishEvent (channel, "day", json);
 			}
 		}

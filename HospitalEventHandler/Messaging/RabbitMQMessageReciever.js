@@ -3,7 +3,8 @@ const Event = require('../Model/event.model.ts');
 const Doctor = require('../Model/doctor.model.ts');
 const Patient = require('../Model/patient.model.ts');
 const Appointment = require('../Model/appointment.model.ts');
-const Read = require('../Model/read.model.js');
+const PatientRead = require('../Model/patient.read.model.js');
+const DoctorRead = require('../Model/doctor.read.model.js');
 
 // module.exports = {
 //     receive: function (exchange, arg) {
@@ -144,23 +145,25 @@ module.exports = {
             eventdata: message
         }).then(() => {
             if (routingkey.includes("patient.registered")) {
-                Read.create({
+                PatientRead.create({
                     patient: message
                 })
             } else if (routingkey.includes("patient.deleted")) {
                 
             }else if (routingkey.includes("patient.edited")) {
-                
+                PatientRead.findOneAndUpdate({"patient.bsn": message.bsn}, {doctor: message});
             } else if (routingkey.includes("doctor.registered")) {
-                Read.create({
+                DoctorRead.create({
                     doctor: message
                 })
             } else if (routingkey.includes("doctor.deleted")) {
                 
             } else if (routingkey.includes("doctor.edited")) {
-               
+               DoctorRead.findOneAndUpdate({"doctor.doctorId": message.doctorId}, {doctor: message});
             } else if (routingkey.includes("appointment.created")) {
-                Read.findOneAndUpdate({"patient.bsn": message.bsn}, { appointment: message } ).catch((err)=> console.log(err))
+                console.log("Before patient update, before doctor update");
+                PatientRead.findOneAndUpdate({"patient.bsn": message.bsn}, { appointment: message } ).catch((err) => console.log(err));
+                DoctorRead.findOneAndUpdate({"doctor.doctorId": message.doctorId}, { appointment: message } ).catch((err) => console.log(err));
             }
         })
     }

@@ -1,15 +1,10 @@
 const mongoose = require('mongoose');
 var conn = mongoose.createConnection('mongodb://mongo:27017/hospitalread');
 
-const Read = conn.model('read', new mongoose.Schema({
+const PatientRead = conn.model('patientRead', new mongoose.Schema({
     patient: {
         type: mongoose.Schema.Types.Object,
         ref: 'patient',
-        required: false
-    },
-    doctor: {
-        type: mongoose.Schema.Types.Object,
-        ref: 'doctor',
         required: false
     },
     appointment: {
@@ -19,4 +14,4 @@ const Read = conn.model('read', new mongoose.Schema({
     }
 }));
 
-module.exports = Read;
+module.exports = PatientRead;
