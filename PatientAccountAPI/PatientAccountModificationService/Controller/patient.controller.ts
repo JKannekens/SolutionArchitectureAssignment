@@ -64,12 +64,12 @@ module.exports = {
     async editPatientByBsn(req, res, next) {
         let editedPatient = req.body;
 
-        Patient.findOneAndUpdate({ bsn: editedPatient.bsn }, editedPatient)
+        Patient.findOneAndUpdate({ bsn: editedPatient.bsn }, editedPatient, {new: true})
             .then((patient) => {
                 if (patient !== null) {
-                    PatientEvent.create(patientRegistered("patient.edited", editedPatient))
+                    PatientEvent.create(patientRegistered("patient.edited", patient))
                         .then((resp) => {
-                            messagePublisher.publish("patient", "patient-edited-queue","patient.edited", editedPatient);
+                            messagePublisher.publish("patient", "patient-edited-queue","patient.edited", patient);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(resp);

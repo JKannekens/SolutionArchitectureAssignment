@@ -115,11 +115,11 @@ module.exports = {
     async editAppointmentById(req, res, next) {
         let editedAppointment = req.body;
 
-        Appointment.findOneAndUpdate({ appointmentId: editedAppointment.appointmentId }, editedAppointment)
-            .then((response) => {
-                AppointmentEvent.create(patientAppointmentCreated("appointment.edited", editedAppointment))
+        Appointment.findOneAndUpdate({ appointmentId: editedAppointment.appointmentId }, editedAppointment, {new: true})
+            .then((appointment) => {
+                AppointmentEvent.create(patientAppointmentCreated("appointment.edited", appointment))
                     .then((response) => {
-                        messagePublisher.publish("appointment", "appointment-edited-queue", "appointment.edited", editedAppointment);
+                        messagePublisher.publish("appointment", "appointment-edited-queue", "appointment.edited", appointment);
                         res.status(200)
                             .contentType('application/json')
                             .send(response);
