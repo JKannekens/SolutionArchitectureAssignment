@@ -1,4 +1,5 @@
 const Doctor = require('../../Model/doctor.model.ts');
+const DoctorRead = require('../../Model/doctorread.model.ts');
 const DoctorEvent = require('../../Model/event.model.ts');
 const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 let registerDoctorCommand = require('../Command/registerdoctor.command.ts');
@@ -9,7 +10,7 @@ module.exports = {
     async getDoctorById(req, res, next) {
         let doctorId = req.body.doctorId;
 
-        Doctor.findOne({ doctorId: doctorId })
+        DoctorRead.findOne({ "doctor.doctorId": doctorId })
             .then((doctor) => {
                 if (doctor !== null) {
                     res.status(200)
@@ -30,7 +31,7 @@ module.exports = {
     async getDoctorByLastName(req, res, next) {
         let lastName = req.body.lastName;
 
-        Doctor.findOne({ lastName: lastName })
+        DoctorRead.find({ "doctor.lastName": lastName })
             .then((doctor) => {
                 if (doctor !== null) {
                     res.status(200)

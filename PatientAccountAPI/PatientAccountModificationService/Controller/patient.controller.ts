@@ -1,5 +1,6 @@
 const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 const Patient = require('../../Model/patient.model.ts');
+const PatientRead = require('../../Model/patientread.model.ts');
 const PatientEvent = require('../../Model/patient-event.model.ts');
 let registerPatient = require('../Command/registerpatient.command.ts');
 let patientRegistered = require('../Event/patientRegistered.event.ts');
@@ -8,7 +9,7 @@ module.exports = {
     async getPatientByBsn(req, res, next) {
         let bsn = req.body.bsn;
 
-        Patient.findOne({bsn: bsn})
+        PatientRead.findOne({"patient.bsn": bsn})
             .then((patient) => {
                 res.status(200)
                     .contentType('application/json')
@@ -24,7 +25,7 @@ module.exports = {
     async getPatientByLastName(req, res, next) {
         let lastname = req.body.lastName;
 
-        Patient.find({lastName: lastname})
+        PatientRead.find({"oatient.lastName": lastname})
             .then((patients) => {
                 res.status(200)
                     .contentType('application/json')
