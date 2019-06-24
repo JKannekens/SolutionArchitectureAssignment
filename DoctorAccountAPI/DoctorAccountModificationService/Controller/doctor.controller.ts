@@ -110,7 +110,7 @@ module.exports = {
     },
 
     async deleteDoctor(req, res, next) {
-        let doctor = req.body.doctorId;
+        let doctor = req.body;
 
         Doctor.findOne({ doctorId: doctor.doctorId })
             .then((doctor) => {
