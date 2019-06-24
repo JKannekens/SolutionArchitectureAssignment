@@ -23,5 +23,5 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/appointment", patientRouter);
 
 app.listen(8020, () => {
-  console.log('Example app listening on port 8000!')
+  console.log('Example app listening on port 8020!')
 });

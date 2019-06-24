@@ -7,6 +7,33 @@ let createPatientAppointmentCommand = require('../Command/createPatientAppointme
 let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event.ts');
 
 module.exports = {
+    async getAppointmentsBetweenDates(req, res, next) {
+        let startDate = req.body.startDate;
+        let endDate = req.body.endDate;
+
+        AppointmentEvent.find({})
+            .then((appointmentEvents) => {
+                let appointments = [];
+
+                for (let i = 0; i < appointmentEvents.length; i++) {
+                    let appointment = appointmentEvents[i].appointment;
+
+                    if (Date.parse(appointment.date) >= Date.parse(startDate) && Date.parse(appointment.date) <= Date.parse(endDate)) {
+                        appointments.push(appointment);
+                    }
+                }
+
+                res.status(200)
+                    .contentType('application/json')
+                    .send(appointments);
+            })
+            .catch((err) => {
+                res.status(500)
+                    .json({ msg: "Error getting appointments, try again later" });
+                console.log(err);
+            });
+    },
+
     async getAppointmentsByDate(req, res, next) {
         let date = req.body.date;
 
@@ -51,11 +78,11 @@ module.exports = {
         Appointment.findOne({ date: appointmentToCreate.date })
             .then((appointment) => {
 
-                if (appointment === null || appointment.date !== appointment.date ) {
+                if (appointment === null || appointment.date !== appointment.date) {
                     Appointment.create(appointmentToCreate);
                     AppointmentEvent.create(patientAppointmentCreated("appointment.create", appointmentToCreate))
                         .then((response) => {
-                            messagePublisher.publish("appointment", "appointment-created-queue","appointment.created", appointmentToCreate);
+                            messagePublisher.publish("appointment", "appointment-created-queue", "appointment.created", appointmentToCreate);
 
                             res.status(200)
                                 .contentType('application/json')
