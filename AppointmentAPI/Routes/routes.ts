@@ -7,7 +7,7 @@ const router = express.Router();
     router.post('/getAppointmentsByDate', AppointmentController.getAppointmentsByDate);
     router.post('/getAppointmentById', AppointmentController.getAppointmentById);
     router.post('/createAppointment', AppointmentController.createAppointment);
-    // app.put('/editAppointmentById', AppointmentController.editAppointmentById);
-    // app.delete('/deleteAppointmentById', AppointmentController.deleteAppointmentById);
+    router.put('/editAppointmentById', AppointmentController.editAppointmentById);
+    router.delete('/deleteAppointmentById', AppointmentController.deleteAppointmentById);
 
 module.exports = router;
