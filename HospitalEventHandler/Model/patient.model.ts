@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const DoctorSchema = new Schema({
-    doctorId: {
+const PatientSchema = new Schema({
+    bsn: {
         type: Number,
         required: true
     },
@@ -15,18 +15,23 @@ const DoctorSchema = new Schema({
         required: true
     },
     middleName: {
-        type: String
+        type: String,
+        required: false
     },
     lastName: {
         type: String,
         required: true
     },
-    specialization: {
+    age: {
+        type: Number,
+        required: true
+    },
+    streetName: {
         type: String,
         required: true
     },
-    address: {
-        type: String,
+    houseNr: {
+        type: Number,
         required: true
     },
     postalCode: {
@@ -36,9 +41,13 @@ const DoctorSchema = new Schema({
     city: {
         type: String,
         required: true
+    },
+    deceased: {
+        type: Boolean,
+        required: true
     }
 });
 
-const Doctor = mongoose.model('doctor', DoctorSchema);
+const Patient = mongoose.model('patient', PatientSchema);
 
-module.exports = Doctor;
+module.exports = Patient;

@@ -1,9 +1,10 @@
 // import createPatientAppointmentCommand from '../Command/createPatientAppointment.command';
 
 const Appointment = require('../../Model/appointment.model.ts');
+const AppointmentEvent = require('../../Model/event.model.ts');
 const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 let createPatientAppointmentCommand = require('../Command/createPatientAppointment.command.ts');
-// let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event.ts');
+let patientAppointmentCreated = require('../Event/patientAppointmentCreated.event.ts');
 
 module.exports = {
     async getAppointmentsByDate(req, res, next) {
@@ -45,14 +46,17 @@ module.exports = {
 
     async createAppointment(req, res, next) {
         let appointmentToCreate = createPatientAppointmentCommand(req.body);
-
+        console.log(appointmentToCreate);
+        console.log("body: " + req.body);
         Appointment.findOne({ date: appointmentToCreate.date })
             .then((appointment) => {
 
                 if (appointment === null || appointment.date !== appointment.date ) {
-                    Appointment.create(appointmentToCreate)
+                    Appointment.create(appointmentToCreate);
+                    AppointmentEvent.create(patientAppointmentCreated("appointment.create", appointmentToCreate))
                         .then((response) => {
-                            messagePublisher.publish("appointment", "appointment.create", appointmentToCreate);
+                            messagePublisher.publish("appointment", "appointment-created-queue","appointment.created", appointmentToCreate);
+
                             res.status(200)
                                 .contentType('application/json')
                                 .send(response);
@@ -104,7 +108,7 @@ module.exports = {
                         })
                         .catch((err) => {
                             res.status(500)
-                                .json({ msg: "Error deleting apppointment, try again later" });
+                                .json({ msg: "Error deleting appointment, try again later" });
                             console.log(err);
                         })
                 }

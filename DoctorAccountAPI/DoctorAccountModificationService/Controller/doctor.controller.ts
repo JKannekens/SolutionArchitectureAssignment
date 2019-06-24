@@ -1,6 +1,8 @@
 const Doctor = require('../../Model/doctor.model.ts');
+const DoctorEvent = require('../../Model/event.model.ts');
 const messagePublisher = require('../../Messaging/RabbitMQMessagePublisher.js');
 let registerDoctorCommand = require('../Command/registerdoctor.command.ts');
+let doctorRegistered = require('../Event/doctorregistered.event.ts');
 
 module.exports = {
 
@@ -49,11 +51,13 @@ module.exports = {
     async registerDoctor(req, res, next) {
         let registerDoctor = registerDoctorCommand(req.body);
 
+        console.log(req.body);
+        console.log(registerDoctor);
         Doctor.findOne({ lastName: registerDoctor.lastName })
             .then((doctors) => {
-
                 if (doctors === null || doctors.address !== registerDoctor.address ) {
-                    Doctor.create(registerDoctor)
+                    Doctor.create(registerDoctor);
+                    DoctorEvent.create(doctorRegistered("doctor.registered", registerDoctor))
                         .then((response) => {
                             messagePublisher.publish("doctor", "doctor-registered-queue","doctor.registered", registerDoctor);
                             res.status(200)
@@ -83,7 +87,11 @@ module.exports = {
         Doctor.findOne({ doctorId: editedDoctor.doctorId })
             .then((doctor) => {
                 if (doctor !== null) {
-                    Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId }, editedDoctor)
+                    Object.keys(editedDoctor).forEach(function(k) {
+                        console.log('key: ' + k);
+                        console.log('attr: ' + editedDoctor[k]);
+                    });
+                    DoctorEvent.create(doctorRegistered("doctor.edited", doctor))
                         .then((resp) => {
                             messagePublisher.publish("doctor", "doctor-edited-queue","doctor.edited", editedDoctor);
                             res.status(200)
