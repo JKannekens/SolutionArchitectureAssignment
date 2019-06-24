@@ -19,14 +19,14 @@ module.exports = {
                     let appointmentEvent = appointmentEvents[i];
                     let appointment = appointmentEvent.appointment;
 
-                    if (appointmentEvent.routingKey == "appointment.create") {
+                    if (appointmentEvent.routingkey == "appointment.create") {
                         if (Date.parse(appointment.date) >= Date.parse(startDate) && Date.parse(appointment.date) <= Date.parse(endDate)) {
                             appointments.push(appointment);
                         }
-                    } else if (appointmentEvent.routingKey == "appointment.edited") {
+                    } else if (appointmentEvent.routingkey == "appointment.edited") {
                         let index = appointments.findIndex(current => current.id == appointment.id);
                         appointments[index] = appointment;
-                    } else if (appointmentEvent.routingKey == "appointment.deleted") {
+                    } else if (appointmentEvent.routingkey == "appointment.deleted") {
                         appointments = appointments.filter(current => current.id != appointment.id);
                     }
                 }
