@@ -107,7 +107,7 @@ module.exports = {
     async editAppointmentById(req, res, next) {
         let editedAppointment = req.body;
 
-        Appointment.findOneAndUpdate({ appointmentId: editedAppointment.appointmentId })
+        Appointment.findOneAndUpdate({ appointmentId: editedAppointment.appointmentId }, editedAppointment)
             .then((response) => {
                 AppointmentEvent.create(patientAppointmentCreated("appointment.edited", editedAppointment))
                     .then((response) => {
