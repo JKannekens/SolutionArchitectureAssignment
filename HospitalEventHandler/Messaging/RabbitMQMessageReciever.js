@@ -13,10 +13,6 @@ module.exports = {
                 return setTimeout(module.exports.receive, 10000, exchange, queueName, arg);
             }
 
-            console.log("LISTENING ON exchange: " + exchange);
-            console.log("LISTENING ON QUEUE: " + queueName);
-            console.log("LISTENING ON routing: " + arg);
-
             connection.createChannel(function(error1, channel) {
                 if (error1) {
                     throw error1;
@@ -43,7 +39,6 @@ module.exports = {
                     channel.bindQueue(q.queue, exchange, arg);
 
                     channel.consume(q.queue, function(msg) {
-                        console.log("CONSUMED INSIDE EVENTHANDLER");
                         module.exports.handleMessage(msg.fields.routingKey,JSON.parse(msg.content));
                     }, {
                         noAck: true
@@ -54,9 +49,6 @@ module.exports = {
     },
 
     handleMessage: function (routingkey, message) {
-        console.log("INSIDE HANDLEMESSAGE FUNCTION EVENTHANDLER");
-        console.log(routingkey);
-        console.log(message);
         Event.create({
             routingkey: routingkey,
             eventdata: message
@@ -84,7 +76,6 @@ module.exports = {
                 DoctorRead.findOneAndUpdate({"doctor.doctorId": message.doctorId}, { doctor: message } ).catch((err) => console.log(err));
 
             } else if (routingkey.includes("appointment.created")) {
-                console.log("Before patient update, before doctor update");
                 PatientRead.findOneAndUpdate({"patient.bsn": message.bsn}, { appointment: message } ).catch((err) => console.log(err));
                 DoctorRead.findOneAndUpdate({"doctor.doctorId": message.doctorId}, { appointment: message } ).catch((err) => console.log(err));
 

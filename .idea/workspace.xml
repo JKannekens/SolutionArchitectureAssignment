@@ -274,7 +274,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1561368844327</updated>
-      <workItem from="1561368848400" duration="7361000" />
+      <workItem from="1561368848400" duration="11564000" />
     </task>
     <servers />
   </component>
@@ -315,12 +315,7 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
