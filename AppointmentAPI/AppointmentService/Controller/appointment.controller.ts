@@ -132,10 +132,10 @@ module.exports = {
     async deleteAppointmentById(req, res, next) {
         let appointment = req.body;
 
-        Appointment.findOne({ appointmentId: appointment })
+        Appointment.findOne({ appointmentId: appointment.appointmentId })
             .then((response) => {
                 if (response !== null) {
-                    Appointment.findOneAndDelete({ appointmentId: appointment })
+                    Appointment.findOneAndDelete({ appointmentId: appointment.appointmentId })
                         .then((response) => {
                             AppointmentEvent.create(patientAppointmentCreated("appointment.edited", appointment))
                                 .then((response) => {
