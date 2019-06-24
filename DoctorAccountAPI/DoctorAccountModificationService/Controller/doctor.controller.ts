@@ -82,12 +82,12 @@ module.exports = {
     async editDoctorById(req, res, next) {
         let editedDoctor = req.body;
 
-        Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId }, editedDoctor)
+        Doctor.findOneAndUpdate({ doctorId: editedDoctor.doctorId }, editedDoctor, {new: true})
             .then((doctor) => {
                 if (doctor !== null) {
-                    DoctorEvent.create(doctorRegistered("doctor.edited", editedDoctor))
+                    DoctorEvent.create(doctorRegistered("doctor.edited", doctor))
                         .then((resp) => {
-                            messagePublisher.publish("doctor", "doctor-edited-queue","doctor.edited", editedDoctor);
+                            messagePublisher.publish("doctor", "doctor-edited-queue","doctor.edited", doctor);
                             res.status(200)
                                 .contentType('application/json')
                                 .send(resp);
