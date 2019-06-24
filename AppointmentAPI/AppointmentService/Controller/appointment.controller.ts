@@ -16,10 +16,18 @@ module.exports = {
                 let appointments = [];
 
                 for (let i = 0; i < appointmentEvents.length; i++) {
-                    let appointment = appointmentEvents[i].appointment;
+                    let appointmentEvent = appointmentEvents[i];
+                    let appointment = appointmentEvent.appointment;
 
-                    if (Date.parse(appointment.date) >= Date.parse(startDate) && Date.parse(appointment.date) <= Date.parse(endDate)) {
-                        appointments.push(appointment);
+                    if (appointmentEvent.routingKey == "appointment.create") {
+                        if (Date.parse(appointment.date) >= Date.parse(startDate) && Date.parse(appointment.date) <= Date.parse(endDate)) {
+                            appointments.push(appointment);
+                        }
+                    } else if (appointmentEvent.routingKey == "appointment.edited") {
+                        let index = appointments.findIndex(current => current.id == appointment.id);
+                        appointments[index] = appointment;
+                    } else if (appointmentEvent.routingKey == "appointment.deleted") {
+                        appointments = appointments.filter(current => current.id != appointment.id);
                     }
                 }
 
