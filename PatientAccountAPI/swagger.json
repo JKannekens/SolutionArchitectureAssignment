@@ -73,26 +73,6 @@
         }
       }
     },
-    "appointment": {
-      "type": "object",
-      "properties": {
-        "appointmentId": {
-          "type": "number"
-        },
-        "bsn": {
-          "type": "number"
-        },
-        "doctorId": {
-          "type": "number"
-        },
-        "date": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        }
-      }
-    },
     "deleteAppointment": {
       "type": "object",
       "properties": {

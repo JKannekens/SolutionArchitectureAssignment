@@ -47,6 +47,37 @@
         }
       }
     },
+    "AppointmentArray": {
+      "type": "array",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
+        },
+        "bsn": {
+          "type": "number"
+        },
+        "doctorId": {
+          "type": "number"
+        },
+        "date": {
+          "type": "object"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "GetAppointmentsBetweenDates": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "object"
+        },
+        "endDate": {
+          "type": "object"
+        }
+      }
+    },
     "deleteAppointment": {
       "type": "object",
       "properties": {
@@ -57,19 +88,19 @@
     }
   },
   "paths": {
-    "/appointment/getAppointmentsByDate": {
+    "/appointment/getAppointmentsBetweenDates": {
       "post": {
         "tags": [
           "getAppointmentsByDate"
         ],
-        "summary": "Get appointments by date",
+        "summary": "Get appointments between two dates",
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "Appointments we want to retrieve by date",
+            "description": "Appointments we want to retrieve between two dates",
             "schema": {
-              "$ref": "#/definitions/Appointment"
+              "$ref": "#/definitions/GetAppointmentsBetweenDates"
             }
           }
         ],
@@ -80,39 +111,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Appointment"
-            }
-          },
-          "400": {
-            "description": "Failed, bad post data."
-          }
-        }
-      }
-    },
-    "/appointment/getAppointmentById": {
-      "post": {
-        "tags": [
-          "getAppointmentById"
-        ],
-        "summary": "Get an appointment by ID",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Appointment we want to retrieve by ID",
-            "schema": {
-              "$ref": "#/definitions/Appointment"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Appointment"
+              "$ref": "#/definitions/AppointmentArray"
             }
           },
           "400": {

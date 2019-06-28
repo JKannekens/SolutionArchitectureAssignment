@@ -4,8 +4,6 @@ const router = express.Router();
 
     //Appointments
     router.post('/getAppointmentsBetweenDates', AppointmentController.getAppointmentsBetweenDates);
-    router.post('/getAppointmentsByDate', AppointmentController.getAppointmentsByDate);
-    router.post('/getAppointmentById', AppointmentController.getAppointmentById);
     router.post('/createAppointment', AppointmentController.createAppointment);
     router.put('/editAppointmentById', AppointmentController.editAppointmentById);
     router.delete('/deleteAppointmentById', AppointmentController.deleteAppointmentById);
