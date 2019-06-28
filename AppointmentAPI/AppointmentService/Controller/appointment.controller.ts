@@ -42,43 +42,6 @@ module.exports = {
             });
     },
 
-    async getAppointmentsByDate(req, res, next) {
-        let date = req.body.date;
-
-        Appointment.find({ date: date })
-            .then((appointments) => {
-                res.status(200)
-                    .contentType('application/json')
-                    .send(appointments);
-            })
-            .catch((err) => {
-                res.status(500)
-                    .json({ msg: "Error getting appointments, try again later" });
-                console.log(err);
-            });
-    },
-
-    async getAppointmentById(req, res, next) {
-        let appointmentId = req.body.appointmentId;
-
-        Appointment.findOne({ appointmentId: appointmentId })
-            .then((appointment) => {
-                if (appointment !== null) {
-                    res.status(200)
-                        .contentType('application/json')
-                        .send(appointment);
-                } else {
-                    res.status(400)
-                        .json({ msg: "Appointment doesn't exist" });
-                }
-            })
-            .catch((err) => {
-                res.status(500)
-                    .json({ msg: "Error getting appointment" });
-                console.log(err);
-            });
-    },
-
     async createAppointment(req, res, next) {
         let appointmentToCreate = createPatientAppointmentCommand(req.body);
         console.log(appointmentToCreate);
