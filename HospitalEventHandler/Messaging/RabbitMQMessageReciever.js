@@ -19,13 +19,14 @@ module.exports = {
                 }
 
                 channel.assertExchange(exchange, 'topic', {
-                    durable: false,
-                    persistent: false
+                    durable: true,
+                    persistent: true,
                 });
 
                 channel.assertQueue(queueName, {
                     autoDelete : false,
                     durable    : true,
+                    persistent: true,
                     arguments  : {
                         "x-message-ttl" : 300000
                     }

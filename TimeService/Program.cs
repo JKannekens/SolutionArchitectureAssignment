@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,15 +31,19 @@ namespace Send {
 			Console.WriteLine ("----- Time service connected to RabbitMQ ------");
 
 			using (var channel = connection.CreateModel ()) {
-				channel.ExchangeDeclare("time", ExchangeType.Topic);
 
-				channel.QueueDeclare (queue: "time",
-					durable : false,
-					exclusive : false,
-					autoDelete : false,
-					arguments : null);
+                channel.ExchangeDeclare("time", ExchangeType.Topic, durable:true);
 
-				Console.WriteLine ("----- Time service started ------");
+                var queueArgs = new Dictionary<string, object>();
+                queueArgs.Add("x-message-ttl", 300000);
+
+                channel.QueueDeclare(queue: "time",
+                    durable: true,
+                    exclusive: false,
+                    autoDelete: false,
+                    arguments: queueArgs);
+
+                Console.WriteLine ("----- Time service started ------");
 				while (true) {
 					CheckTime (channel);
 					CheckDay (channel);
@@ -88,7 +93,7 @@ namespace Send {
 			var body = Encoding.UTF8.GetBytes (message);
 
 			var properties = channel.CreateBasicProperties ();
-			properties.Persistent = true;
+            properties.DeliveryMode = 2;
 
 			channel.BasicPublish (exchange: "time",
 				routingKey : routingKey,

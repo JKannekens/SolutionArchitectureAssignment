@@ -15,7 +15,8 @@ module.exports = {
 
                 channel.assertExchange(exchange, 'topic', {
                     autoDelete : false,
-                    durable    : false,
+                    durable    : true,
+                    persistent: true,
                     arguments  : {
                         "x-message-ttl" : 300000
                     }
@@ -24,6 +25,7 @@ module.exports = {
                 channel.assertQueue(queueName, {
                     autoDelete : false,
                     durable    : true,
+                    persistent: true,
                     arguments  : {
                         "x-message-ttl" : 300000
                     }
@@ -36,7 +38,7 @@ module.exports = {
 
                     channel.bindQueue(q.queue, exchange, arg);
 
-                    channel.publish(exchange, arg, Buffer.from(JSON.stringify(msg)));
+                    channel.publish(exchange, arg, Buffer.from(JSON.stringify(msg)), {persistent: true});
                     console.log(" [x] Sent %s: '%s'", arg, msg);
                 });
             });
