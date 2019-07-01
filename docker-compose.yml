@@ -1,0 +1,105 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmquser
+      - RABBITMQ_DEFAULT_PASS=DEBmbwkSrzy9D1T9cJfa
+      
+#  sqlserver:
+#    image: microsoft/mssql-server-linux:latest
+#    container_name: sqlserver
+#    volumes:
+#      - sqlserverdata:/var/opt/mssql
+#    ports:
+#      - "1434:1433"
+#    environment:
+#      - ACCEPT_EULA=Y
+#      - MSSQL_PID=Developer
+#      - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
+
+  mongo:
+    image: mongo
+    ports:
+    - "27017:27017"
+#    volumes:
+#    - mongodata:/data/db
+
+  logserver:
+    image: datalust/seq:latest
+    container_name: logserver
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
+
+  appointmentapi:
+    image: solutionarchitectureassignment/appointmentapi:latest
+    build: ./AppointmentAPI
+    #    depends_on:
+    #      - rabbitmq
+    #      - mongo
+    links:
+      - mongo
+    ports:
+      - "8020:8020"
+
+  patientaccountapi:
+    image: solutionarchitectureassignment/patientaccountapi:latest
+    build: ./PatientAccountAPI
+#    depends_on:
+#      - rabbitmq
+#      - mongo
+    links:
+      - mongo
+    ports:
+      - "8000:8000"
+
+  doctoraccountapi:
+    image: solutionarchitectureassignment/doctoraccountapi:latest
+    build: ./DoctorAccountAPI
+#    depends_on:
+#      - rabbitmq
+#      - mongo
+    links:
+      - mongo
+    ports:
+      - "8060:8060"
+
+  hospitaleventstore:
+    image: solutionarchitectureassignment/hospitaleventhandler:latest
+    build: ./HospitalEventHandler
+    links:
+      - mongo
+      - rabbitmq
+    ports:
+      - "8010:8010"
+
+  notificationservice:
+    image: solutionarchitectureassignment/notificationservice:latest
+    build: ./NotificationService
+    links:
+      - rabbitmq
+    ports:
+      - "8050:8050"
+
+  timeservice:
+    image: solutionarchitectureassignment/timeservice:latest
+    build: TimeService
+    container_name: timeservice
+    depends_on:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+volumes:
+  rabbitmqdata:
+    external: true
+#  mongodata:
+#    external: true

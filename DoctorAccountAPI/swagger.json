@@ -1,0 +1,227 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "DoctorAPI",
+    "description": "Swagger for DoctorAPI",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8060",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Doctor accounts",
+      "description": "API for doctors"
+    }
+  ],
+  "schemes": [
+    ""
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "Doctor": {
+      "type": "object",
+      "properties": {
+        "doctorId": {
+          "type": "number"
+        },
+        "password": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "specialization": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      }
+    },
+    "deleteDoctor": {
+      "type": "object",
+      "properties": {
+        "doctorId": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/doctor/api/doctorAccount/getDoctorById": {
+      "post": {
+        "tags": [
+          "getDoctorByDoctorId"
+        ],
+        "summary": "Get a doctor by its Id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Doctor we want to retrieve by Id",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/doctor/api/doctorAccount/getDoctorByLastName": {
+      "post": {
+        "tags": [
+          "getDoctorByDoctorLastName"
+        ],
+        "summary": "Get a doctor by its lastname",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Doctor we want to retrieve by lastname",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/doctor/api/doctorAccount/registerDoctor": {
+      "post": {
+        "tags": [
+          "registerDoctor"
+        ],
+        "summary": "Register a new doctor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Doctor we want to register",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/doctor/api/doctorAccount/editDoctor": {
+      "put": {
+        "tags": [
+          "editDoctor"
+        ],
+        "summary": "Edit a doctor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Doctor we want to edit",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Doctor"
+            }
+          },
+          "400": {
+            "description": "Failed, bad put data."
+          }
+        }
+      }
+    },
+    "/doctor/api/doctorAccount/deleteDoctor": {
+      "delete": {
+        "tags": [
+          "deleteDoctor"
+        ],
+        "summary": "Delete a doctor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Doctor we want to delete",
+            "schema": {
+              "$ref": "#/definitions/deleteDoctor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed, bad ID."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "PatientAPI",
+    "description": "Swagger for PatientAPI",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8000",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Patients and appointments",
+      "description": "API for patients and appointments"
+    }
+  ],
+  "schemes": [
+    ""
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "Patient": {
+      "type": "object",
+      "properties": {
+        "bsn": {
+          "type": "number"
+        },
+        "password": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "age": {
+          "type": "number"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "houseNr": {
+          "type": "number"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "deceased": {
+          "type": "boolean"
+        }
+      }
+    },
+    "deletePatient": {
+      "type": "object",
+      "properties": {
+        "bsn": {
+          "type": "number"
+        }
+      }
+    },
+    "deleteAppointment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/patient/patientAccount/getPatientByBsn": {
+      "post": {
+        "tags": [
+          "getPatientByBsn"
+        ],
+        "summary": "Get a patient by BSN",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Patient we want to retrieve by BSN",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/patient/patientAccount/getPatientByBsn": {
+      "post": {
+        "tags": [
+          "getPatientByLastName"
+        ],
+        "summary": "Get a patient by lastname",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Patient we want to retrieve by lastname",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/patient/patientAccount/registerPatient": {
+      "post": {
+        "tags": [
+          "registerPatient"
+        ],
+        "summary": "Register a new patient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Patient we want to register",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/patient/patientAccount/editPatientByBsn": {
+      "put": {
+        "tags": [
+          "editPatientByBsn"
+        ],
+        "summary": "Edit existing patient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Patient we want to edit",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Patient"
+            }
+          },
+          "400": {
+            "description": "Failed, bad put data."
+          }
+        }
+      }
+    },
+    "/patient/deletePatient": {
+      "delete": {
+        "tags": [
+          "deletePatient"
+        ],
+        "summary": "Delete Patient",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete patient",
+            "schema": {
+              "$ref": "#/definitions/deletePatient"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed, bad ID."
+          }
+        }
+      }
+    }
+  }
+}

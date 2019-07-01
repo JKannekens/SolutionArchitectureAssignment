@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "AppointmentAPI",
+    "description": "Swagger for AppointmentAPI",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8020",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Appointments",
+      "description": "API for appointments"
+    }
+  ],
+  "schemes": [
+    ""
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "Appointment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
+        },
+        "bsn": {
+          "type": "number"
+        },
+        "doctorId": {
+          "type": "number"
+        },
+        "date": {
+          "type": "object"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "AppointmentArray": {
+      "type": "array",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
+        },
+        "bsn": {
+          "type": "number"
+        },
+        "doctorId": {
+          "type": "number"
+        },
+        "date": {
+          "type": "object"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "GetAppointmentsBetweenDates": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "object"
+        },
+        "endDate": {
+          "type": "object"
+        }
+      }
+    },
+    "deleteAppointment": {
+      "type": "object",
+      "properties": {
+        "appointmentId": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/appointment/getAppointmentsBetweenDates": {
+      "post": {
+        "tags": [
+          "getAppointmentsByDate"
+        ],
+        "summary": "Get appointments between two dates",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Appointments we want to retrieve between two dates",
+            "schema": {
+              "$ref": "#/definitions/GetAppointmentsBetweenDates"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppointmentArray"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointment/createAppointment": {
+      "post": {
+        "tags": [
+          "createAppointment"
+        ],
+        "summary": "Create an appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Appointment we want to create",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad post data."
+          }
+        }
+      }
+    },
+    "/appointments/editAppointmentById": {
+      "put": {
+        "tags": [
+          "editAppointment"
+        ],
+        "summary": "Edit appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Edit appointment",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Appointment"
+            }
+          },
+          "400": {
+            "description": "Failed, bad put data."
+          }
+        }
+      }
+    },
+    "/appointments/deleteAppointmentById": {
+      "delete": {
+        "tags": [
+          "deleteAppointment"
+        ],
+        "summary": "Delete Appointment",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete appointment",
+            "schema": {
+              "$ref": "#/definitions/deleteAppointment"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed, bad ID."
+          }
+        }
+      }
+    }
+  }
+}
